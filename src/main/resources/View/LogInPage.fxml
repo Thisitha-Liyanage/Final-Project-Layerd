@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="acnLogInPage" prefHeight="700.0" prefWidth="1365.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.the_thirsty_manager.Controller.LogInController">
+   <children>
+      <VBox alignment="CENTER" layoutX="158.0" layoutY="237.0" prefHeight="142.0" prefWidth="277.0" spacing="90.0">
+         <children>
+            <TextField fx:id="txtUserID" alignment="CENTER" promptText="User ID" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: white; -fx-text-fill: white; -fx-prompt-text-fill: white;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <PasswordField fx:id="pwfUserPassword" alignment="CENTER" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1 0; -fx-prompt-text-fill: white; -fx-text-fill: white;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </PasswordField>
+         </children>
+      </VBox>
+      <Button fx:id="btnLogIn" layoutX="253.0" layoutY="473.0" mnemonicParsing="false" onAction="#btnLogInOnAction" onKeyPressed="#btnLogInAnActionK" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 50; -fx-border-width: 2 2 2 2;" text="Log In" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="226.0" layoutY="76.0" prefHeight="55.0" prefWidth="127.0" text="Log In" textFill="WHITE">
+         <font>
+            <Font name="Cambria Math" size="47.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="700.0" fitWidth="815.0" layoutX="550.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Image/LogIn.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

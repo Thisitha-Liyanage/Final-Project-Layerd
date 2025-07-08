@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ancIngredientPage" prefHeight="700.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.the_thirsty_manager.Controller.IngerdientPageController">
+   <children>
+      <AnchorPane prefHeight="700.0" prefWidth="1065.0" style="-fx-background-color: #596275;">
+         <children>
+            <ImageView fitHeight="700.0" fitWidth="1065.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../Image/77d070d3-4fb6-430e-af8a-8fca39755116.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="341.0" layoutY="61.0" prefHeight="58.0" prefWidth="383.0" style="-fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Manage Ingredients" textFill="WHITE">
+               <font>
+                  <Font name="Cambria" size="45.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtSearchCustomer" alignment="CENTER" layoutX="806.0" layoutY="224.0" prefHeight="26.0" prefWidth="174.0" promptText="Search Ingredients ID" style="-fx-background-color: black; -fx-prompt-text-fill: white; -fx-text-fill: white; -fx-border-color: white;" />
+            <Button fx:id="btnSearch" layoutX="972.0" layoutY="217.0" minWidth="41.0" mnemonicParsing="false" onAction="#btnSearchOnAction" prefHeight="40.0" prefWidth="54.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <TableView fx:id="tableViewIngredientt" layoutX="282.0" layoutY="257.0" prefHeight="413.0" prefWidth="522.0" style="-fx-border-color: black; -fx-border-width: 1 1 1 1;">
+               <columns>
+                  <TableColumn fx:id="clnIngredientID" editable="false" minWidth="0.0" prefWidth="100.0" text="Ingredient ID" />
+                  <TableColumn fx:id="clnItemID" editable="false" prefWidth="145.0" text="Item ID" />
+                  <TableColumn fx:id="clnInventoryID" editable="false" prefWidth="157.0" text="Inventory ID" />
+                  <TableColumn fx:id="clnStockUse" prefWidth="118.0" text="Stock Use" />
+               </columns>
+            </TableView>
+            <HBox layoutX="439.0" layoutY="140.0" prefHeight="66.0" prefWidth="187.0" spacing="150.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Button fx:id="btnAddIngredients" mnemonicParsing="false" onAction="#btnAddIngredientsOnAction" prefHeight="59.0" prefWidth="184.0" style="-fx-background-color: #116530; -fx-background-radius: 25;" text="Add Ingredients" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+            <AnchorPane fx:id="ancIngredientManagePageLoader" layoutX="193.0" layoutY="206.0" prefHeight="460.0" prefWidth="700.0" style="-fx-background-color: transparent;" visible="false" />
+            <Button layoutX="29.0" layoutY="222.0" mnemonicParsing="false" onAction="#btnRefreshOnAction" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2 2 2 2; -fx-border-radius: 100;" text="Refresh" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <HBox layoutX="55.0" layoutY="26.0" prefHeight="35.0" prefWidth="956.0" spacing="50.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#btnPlaceOrderOnAction" prefHeight="25.0" prefWidth="168.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2 2 2 2;" text="Place Order" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#btnTableOnActon" prefHeight="25.0" prefWidth="168.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2 2 2 2;" text="Table " textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#btnManageItemOnAction" prefHeight="25.0" prefWidth="168.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2 2 2 2;" text="Manage Item" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#btnManagePaymentOnAction" prefHeight="25.0" prefWidth="168.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2 2 2 2;" text="Manage Payment" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#btnManageIngredientOnAction" prefHeight="35.0" prefWidth="179.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2 2 2 2;" text="Manage Ingredient" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

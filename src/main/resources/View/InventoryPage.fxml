@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ancInventoryPage" prefHeight="700.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.the_thirsty_manager.Controller.InventoryPageController">
+   <children>
+      <AnchorPane prefHeight="700.0" prefWidth="1065.0" style="-fx-background-color: #596275;">
+         <children>
+            <ImageView fitHeight="700.0" fitWidth="1065.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../Image/77d070d3-4fb6-430e-af8a-8fca39755116.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="364.0" layoutY="65.0" prefHeight="58.0" prefWidth="358.0" style="-fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Manage Inventory" textFill="WHITE">
+               <font>
+                  <Font name="Cambria" size="45.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtSearchCustomer" alignment="CENTER" layoutX="806.0" layoutY="224.0" prefHeight="26.0" prefWidth="174.0" promptText="Search Inventory ID" style="-fx-background-color: black; -fx-prompt-text-fill: white; -fx-text-fill: white; -fx-border-color: white;" />
+            <Button fx:id="btnSearch" layoutX="972.0" layoutY="217.0" minWidth="41.0" mnemonicParsing="false" onAction="#btnSearchOnAction" prefHeight="40.0" prefWidth="54.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <TableView fx:id="tableViewInventory" layoutX="29.0" layoutY="261.0" prefHeight="413.0" prefWidth="1008.0" style="-fx-border-color: black; -fx-border-width: 1 1 1 1;">
+               <columns>
+                  <TableColumn fx:id="clnInventoryID" editable="false" prefWidth="99.0" text="Inventory ID" />
+                  <TableColumn fx:id="clnName" editable="false" prefWidth="221.0" text=" Name" />
+                  <TableColumn fx:id="clnUnit" editable="false" minWidth="0.0" prefWidth="100.0" text="Unit" />
+                  <TableColumn fx:id="clnCurrentStock" editable="false" prefWidth="145.0" text="Current Stock" />
+                  <TableColumn fx:id="clnReorderLevel" editable="false" prefWidth="157.0" text="Reorder Level" />
+                  <TableColumn fx:id="clnSupplierID" editable="false" prefWidth="107.0" text="Supplier ID" />
+                  <TableColumn fx:id="Date" editable="false" prefWidth="177.0" text="Expiration Date" />
+               </columns>
+            </TableView>
+            <HBox layoutX="130.0" layoutY="140.0" prefHeight="66.0" prefWidth="806.0" spacing="150.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Button fx:id="btnAddInventory" mnemonicParsing="false" onAction="#btnAddInventoryOnAction" prefHeight="59.0" prefWidth="166.0" style="-fx-background-color: #116530; -fx-background-radius: 25;" text="Add Inventory" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="btnUpdateInventory" mnemonicParsing="false" onAction="#btnUpdateInventoryOnAction" prefHeight="59.0" prefWidth="182.0" style="-fx-background-color: #273c75; -fx-background-radius: 25;" text="Update Inventory" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="btnDeleteInventory" mnemonicParsing="false" onAction="#btnDeleteInventoryOnAction" prefHeight="59.0" prefWidth="173.0" style="-fx-background-color: #750000; -fx-background-radius: 25;" text="Delete Inventory" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+            <AnchorPane fx:id="ancInventoryManagePageLoader" layoutX="193.0" layoutY="206.0" prefHeight="460.0" prefWidth="700.0" style="-fx-background-color: transparent;" visible="false" />
+            <Button layoutX="29.0" layoutY="222.0" mnemonicParsing="false" onAction="#btnRefreshOnAction" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2 2 2 2; -fx-border-radius: 100;" text="Refresh" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <HBox layoutX="347.0" layoutY="14.0" prefHeight="35.0" prefWidth="393.0" spacing="50.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#btnInventoryOnAction" prefHeight="25.0" prefWidth="168.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2 2 2 2;" text="Inventory" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#btnSuppierOnAction" prefHeight="25.0" prefWidth="168.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2 2 2 2;" text="Supplier" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
