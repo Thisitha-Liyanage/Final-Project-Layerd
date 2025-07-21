@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="459.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.the_thirsty_manager.Controller.ManageIngerdientController.AddIngredientController">
+<AnchorPane fx:id="ancAddIngredient" prefHeight="459.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.the_thirsty_manager.Controller.ManageIngerdientController.AddIngredientController">
    <children>
       <AnchorPane prefHeight="459.0" prefWidth="699.0" style="-fx-background-color: #c23616;">
          <children>

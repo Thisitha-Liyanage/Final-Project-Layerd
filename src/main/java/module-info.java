@@ -29,6 +29,8 @@ module lk.ijse.the_thirsty_manager.finalproject {
     opens lk.ijse.the_thirsty_manager.Model.AttendanceManage to javafx.fxml;
     opens lk.ijse.the_thirsty_manager.Controller.TableManageController to javafx.fxml;
     opens lk.ijse.the_thirsty_manager.Model.TableManageMoled to javafx.fxml;
+    opens lk.ijse.the_thirsty_manager.Model.IngredientManageModel to javafx.fxml;
+    opens lk.ijse.the_thirsty_manager.Controller.ManageIngerdientController to javafx.fxml;
     exports lk.ijse.the_thirsty_manager;
 
 

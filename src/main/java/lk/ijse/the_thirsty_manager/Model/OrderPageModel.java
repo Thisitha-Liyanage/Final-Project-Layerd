@@ -50,7 +50,10 @@ public class OrderPageModel {
             }
 
             //change quantity
-            String updateStockSql = "update inventory set current_stock = current_stock - ? where inventory_id = ?";
+            String updateStockSql = "UPDATE inventory i\n" +
+                    "JOIN ingredients ing ON i.inventory_id = ing.inventory_id\n" +
+                    "SET i.current_stock = i.current_stock - (ing.quantity_used * ?)\n" +
+                    "WHERE ing.menu_item_id = ? ";
             PreparedStatement updateStockPstm = connection.prepareStatement(updateStockSql);
 
                 saveOrderDetailPstm.setDouble(1, orderDto.getQuantity());

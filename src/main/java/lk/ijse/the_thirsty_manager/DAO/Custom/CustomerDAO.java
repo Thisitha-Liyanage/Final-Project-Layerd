@@ -1,0 +1,12 @@
+package lk.ijse.the_thirsty_manager.DAO.Custom;
+
+import lk.ijse.the_thirsty_manager.DAO.CrudDAO;
+import lk.ijse.the_thirsty_manager.Entity.CustomerEntity;
+
+import java.sql.SQLException;
+
+public interface CustomerDAO<T> extends CrudDAO<CustomerEntity> {
+    boolean update(T t) throws SQLException;
+    boolean delete(String ID) throws SQLException;
+
+}
