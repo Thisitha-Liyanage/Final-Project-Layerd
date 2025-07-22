@@ -7,6 +7,7 @@ module lk.ijse.the_thirsty_manager.finalproject {
     requires java.desktop;
     requires mysql.connector.j;
     requires java.naming;
+    requires modelmapper;
 
     opens lk.ijse.the_thirsty_manager to javafx.fxml;
     opens lk.ijse.the_thirsty_manager.Model to javafx.fxml;
@@ -31,7 +32,14 @@ module lk.ijse.the_thirsty_manager.finalproject {
     opens lk.ijse.the_thirsty_manager.Model.TableManageMoled to javafx.fxml;
     opens lk.ijse.the_thirsty_manager.Model.IngredientManageModel to javafx.fxml;
     opens lk.ijse.the_thirsty_manager.Controller.ManageIngerdientController to javafx.fxml;
+    opens lk.ijse.the_thirsty_manager.BO;
+    opens lk.ijse.the_thirsty_manager.BO.Custom;
+    opens lk.ijse.the_thirsty_manager.DAO;
+    opens lk.ijse.the_thirsty_manager.DAO.Custom;
+    opens lk.ijse.the_thirsty_manager.DAO.Custom.IMPL;
+    opens lk.ijse.the_thirsty_manager.Entity;
     exports lk.ijse.the_thirsty_manager;
+    exports lk.ijse.the_thirsty_manager.Dto;
 
 
 }

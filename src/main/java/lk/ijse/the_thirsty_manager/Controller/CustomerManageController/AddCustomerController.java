@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.Custom.CustomerBO;
+import lk.ijse.the_thirsty_manager.BO.Custom.IMPL.CustomerBOIMPL;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Model.CustomerManageModel.AddCustomerModel;
 
@@ -45,7 +47,6 @@ public class AddCustomerController implements Initializable {
     @FXML
     private TextField txtCustomerName;
 
-    private AddCustomerModel addCustomerModel = new AddCustomerModel();
 
 
     @FXML
@@ -64,9 +65,9 @@ public class AddCustomerController implements Initializable {
     }
 
     @FXML
-    void btnSaveOnAction(ActionEvent event) throws SQLException {
+    void btnSaveOnAction(ActionEvent event) {
 
-        lblCustomerID.setText(addCustomerModel.getNextId());
+        loadCustomerId();
         String cusID = lblCustomerID.getText();
         String cusName = txtCustomerName.getText();
         String cusAddress = txtCustomerAddress.getText();
@@ -105,22 +106,23 @@ public class AddCustomerController implements Initializable {
             customerDto.setContact(cusContact);
             customerDto.setAge(customerAgeInt);
 
-            try {
-                boolean isSaved = addCustomerModel.saveCustomer(customerDto);
-                if (isSaved) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText(null);
-                    alert.setTitle("Saved");
-                    alert.setContentText("Customer Saved");
-                    alert.show();
-                    btnResetOnAction(null);
-                    loadCustomerId();
-                } else {
-                    errorSender("Not Saved" , null , "Customer Not Saved");
-                }
-            } catch (SQLException e) {
-                errorSender("Database Error" , null , "Internal Database Error");
-            }
+        CustomerBO customerBO = new CustomerBOIMPL();
+        boolean isSaved = false;
+        try {
+            isSaved = customerBO.save(customerDto);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if(isSaved){
+            new Alert(Alert.AlertType.INFORMATION , "Customer Saved").show();
+            loadCustomerId();
+            btnResetOnAction(null);
+        }else{
+
+            new Alert(Alert.AlertType.ERROR , "Customer Not Saved").show();
+            btnResetOnAction(null);
+        }
 
         }
         public void errorSender(String titleTxt , String headerTxt , String contentTxt){
@@ -135,10 +137,11 @@ public class AddCustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadCustomerId();
     }
+    private CustomerBO customerBO = new CustomerBOIMPL();
 
     private void loadCustomerId() {
         try {
-            lblCustomerID.setText(addCustomerModel.getNextId());
+            lblCustomerID.setText(customerBO.nextID());
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -5,8 +5,8 @@ import lk.ijse.the_thirsty_manager.Entity.CustomerEntity;
 
 import java.sql.SQLException;
 
-public interface CustomerDAO<T> extends CrudDAO<CustomerEntity> {
-    boolean update(T t) throws SQLException;
+public interface CustomerDAO extends CrudDAO<CustomerEntity> {
+    boolean update (CustomerEntity customerEntity) throws SQLException;
     boolean delete(String ID) throws SQLException;
-
+    String getNextID() throws SQLException;
 }
