@@ -1,8 +1,5 @@
 package lk.ijse.the_thirsty_manager.Controller;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,12 +12,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.CustomerBO;
 import lk.ijse.the_thirsty_manager.Controller.CustomerManageController.SearchCustomerController;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Dto.TM.CustomerTM;
-import lk.ijse.the_thirsty_manager.Model.CustomerPageModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,8 +26,7 @@ import lombok.Setter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.Duration;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CustomerPageController implements Initializable {
@@ -125,17 +122,17 @@ public class CustomerPageController implements Initializable {
         }
 
     }
-    private final CustomerPageModel customerModel = new CustomerPageModel();
+    private CustomerBO customerBO = BOFactory.getInstance().getBO(BOTypes.CUSTOMER);
     @Setter
     @Getter
     private CustomerTM customerTM = new CustomerTM();
 
     public void loadTable() throws SQLException {
 
-        ArrayList<CustomerDto> customerDTOArrayList = customerModel.getAllCustomer();
+        List<CustomerDto> customerDtoListList = customerBO.getAll();
 
         ObservableList<CustomerTM> list = FXCollections.observableArrayList();
-        for (CustomerDto customerDTO : customerDTOArrayList){
+        for (CustomerDto customerDTO : customerDtoListList){
             CustomerTM customerTM = new CustomerTM(
                     customerDTO.getCustomerID(),
                     customerDTO.getCustomerName(),

@@ -6,6 +6,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.CustomerBO;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Model.CustomerManageModel.DeleteCustomerModel;
 
@@ -62,11 +65,12 @@ public class DeleteCustomerController {
         txtCustomerContact.clear();
         txtCustomerName.clear();
     }
+    private CustomerBO customerBO = BOFactory.getInstance().getBO(BOTypes.CUSTOMER);
 
     @FXML
     void  btnFindOnAction(ActionEvent event) throws SQLException {
         delCusID = txtCustomerID.getText();
-        CustomerDto foundCustomer = deleteCustomerModel.findCustomer(delCusID);
+        CustomerDto foundCustomer = customerBO.searchCustomer(delCusID);
 
 
             if (foundCustomer != null) {
@@ -89,7 +93,7 @@ public class DeleteCustomerController {
 
 
     public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException {
-        boolean isDelete = deleteCustomerModel.deleteCustomer(delCusID);
+        boolean isDelete = customerBO.delete(delCusID) ;
 
         if (delCusID.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);

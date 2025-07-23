@@ -6,6 +6,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.CustomerBO;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Model.CustomerManageModel.UpdateCustomerModel;
 
@@ -44,7 +47,8 @@ public class UpdateCustomerController {
     private TextField txtCustomerName;
 
     private final UpdateCustomerModel updateCustomerModel = new UpdateCustomerModel();
-    private final CustomerDto customerDto = new CustomerDto();
+    private CustomerBO customerBO = BOFactory.getInstance().getBO(BOTypes.CUSTOMER);
+
     String updCusID ;
     String updCusName ;
     String updCusAddress ;
@@ -66,7 +70,7 @@ public class UpdateCustomerController {
         txtCustomerName.clear();
     }
 
-    public void btnUpdateOnAction(ActionEvent actionEvent) throws SQLException {
+    public void btnUpdateOnAction(ActionEvent actionEvent) {
         updCusName = txtCustomerName.getText();
         updCusAddress = txtCustomerAddress.getText();
         updCusContact = txtCustomerContact.getText();
@@ -98,20 +102,32 @@ public class UpdateCustomerController {
             txtCustomerAge.clear();
             return;
         }
+        CustomerDto customerDto = new CustomerDto();
+        customerDto.setCustomerID(updCusID);
+        customerDto.setCustomerName(updCusName);
+        customerDto.setAddress(updCusAddress);
+        customerDto.setContact(updCusContact);
+        customerDto.setAge(updAgeInt);
 
-        boolean isUpdate = updateCustomerModel.updateCustomer(updCusName , updCusAddress , updCusContact , updAgeInt , updCusID);
+        boolean isUpdate = false;
+        try {
+            System.out.println(isUpdate);
+            isUpdate = customerBO.update(customerDto);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         if(isUpdate){
-            infoSender("Success" , null,  "Customer Updated");
+            infoSender("Customer Updated" , null , "Customer Update Success");
             btnResetOnAction(null);
         }else{
-                errorSender("Not Update" , null , "Customer Not Update");
-                btnResetOnAction(null);
-            }
+            new Alert(Alert.AlertType.ERROR , "Customer Not Updated").show();
+            btnResetOnAction(null);
         }
+    }
 
     public void btnFindCustomerOnAction(ActionEvent actionEvent) throws SQLException {
         updCusID = txtCustomerID.getText();
-        CustomerDto foundCustomer = updateCustomerModel.findCustomer(updCusID);
+        CustomerDto foundCustomer = customerBO.searchCustomer(updCusID);
 
         if(foundCustomer != null){
             if (updCusID == null) {

@@ -8,10 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.CustomerBO;
 import lk.ijse.the_thirsty_manager.BO.Custom.IMPL.CustomerBOIMPL;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
-import lk.ijse.the_thirsty_manager.Model.CustomerManageModel.AddCustomerModel;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -63,10 +64,9 @@ public class AddCustomerController implements Initializable {
         txtCustomerName.clear();
 
     }
-
+    private CustomerBO customerBO = BOFactory.getInstance().getBO(BOTypes.CUSTOMER);
     @FXML
     void btnSaveOnAction(ActionEvent event) {
-
         loadCustomerId();
         String cusID = lblCustomerID.getText();
         String cusName = txtCustomerName.getText();
@@ -106,7 +106,6 @@ public class AddCustomerController implements Initializable {
             customerDto.setContact(cusContact);
             customerDto.setAge(customerAgeInt);
 
-        CustomerBO customerBO = new CustomerBOIMPL();
         boolean isSaved = false;
         try {
             isSaved = customerBO.save(customerDto);
@@ -137,7 +136,7 @@ public class AddCustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadCustomerId();
     }
-    private CustomerBO customerBO = new CustomerBOIMPL();
+
 
     private void loadCustomerId() {
         try {

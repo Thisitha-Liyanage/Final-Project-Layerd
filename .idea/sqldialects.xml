@@ -8,11 +8,6 @@
     <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/AttendanceManage/AddAttendanceModel.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/AttendanceManage/SearchAttendanceModel.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/AttendancePageModel.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/CustomerManageModel/AddCustomerModel.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/CustomerManageModel/DeleteCustomerModel.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/CustomerManageModel/SearchCustomerModel.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/CustomerManageModel/UpdateCustomerModel.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/CustomerPageModel.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/EmployeeManageModel/AddEmployeeModel.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/EmployeeManageModel/DeleteEmployeeModel.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/EmployeeManageModel/UpdateEmployeeModel.java" dialect="GenericSQL" />

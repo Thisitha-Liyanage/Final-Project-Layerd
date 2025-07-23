@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.the_thirsty_manager.Dto.ItemDto;
-import lk.ijse.the_thirsty_manager.Model.CustomerManageModel.AddCustomerModel;
 import lk.ijse.the_thirsty_manager.Model.ItemManageModel.AddItemModel;
 
 import java.net.URL;

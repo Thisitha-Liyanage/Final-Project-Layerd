@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.CustomerBO;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Model.CustomerManageModel.SearchCustomerModel;
 
@@ -35,6 +38,7 @@ public class SearchCustomerController {
     @FXML
     private TextField txtCustomerName;
 
+    private CustomerBO customerBO = BOFactory.getInstance().getBO(BOTypes.CUSTOMER);
     @FXML
     void btnCloseOnAction(ActionEvent event) {
         ancSearchCustomerpage.getChildren().clear();
@@ -43,7 +47,7 @@ public class SearchCustomerController {
     private SearchCustomerModel searchCustomerModel = new SearchCustomerModel();
     public void searchCustomer(String cusID){
         try {
-            CustomerDto searchCustomerDto = searchCustomerModel.searchCustomer(cusID);
+            CustomerDto searchCustomerDto = customerBO.searchCustomer(cusID);
 
             if (searchCustomerDto != null){
                 if(cusID.isEmpty()){
