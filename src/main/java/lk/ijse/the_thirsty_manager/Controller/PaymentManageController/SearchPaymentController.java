@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Dto.PaymentDto;
 import lk.ijse.the_thirsty_manager.Dto.SalaryDto;
-import lk.ijse.the_thirsty_manager.Model.CustomerManageModel.SearchCustomerModel;
+
 import lk.ijse.the_thirsty_manager.Model.PaymentManageModel.SearchPaymentModel;
 
 import java.sql.SQLException;

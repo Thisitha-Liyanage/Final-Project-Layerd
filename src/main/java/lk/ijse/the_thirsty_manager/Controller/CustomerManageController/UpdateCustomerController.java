@@ -10,7 +10,7 @@ import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.CustomerBO;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
-import lk.ijse.the_thirsty_manager.Model.CustomerManageModel.UpdateCustomerModel;
+
 
 import java.sql.SQLException;
 
@@ -46,7 +46,7 @@ public class UpdateCustomerController {
     @FXML
     private TextField txtCustomerName;
 
-    private final UpdateCustomerModel updateCustomerModel = new UpdateCustomerModel();
+
     private CustomerBO customerBO = BOFactory.getInstance().getBO(BOTypes.CUSTOMER);
 
     String updCusID ;

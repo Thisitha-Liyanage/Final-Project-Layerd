@@ -13,6 +13,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.AttendanceBO;
 import lk.ijse.the_thirsty_manager.Controller.AttendanceManage.SearchAttendanceController;
 import lk.ijse.the_thirsty_manager.Controller.CustomerManageController.SearchCustomerController;
 import lk.ijse.the_thirsty_manager.Dto.AttendanceDto;
@@ -25,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AttendancePageController implements Initializable {
@@ -122,10 +126,11 @@ public class AttendancePageController implements Initializable {
     void btnreportAttendanceOnAction(ActionEvent event) {
         manageLoad("/View/AttendanceManage/AddAttendance.fxml");
     }
-    private AttendancePageModel attendancePageModel = new AttendancePageModel();
 
+
+    private final AttendanceBO attendanceBO = BOFactory.getInstance().getBO(BOTypes.ATTENDANCE);
     public void loadTable() throws SQLException {
-        ArrayList<AttendanceDto> attendanceDTOArrayList = attendancePageModel.getAllAttendance();
+        List<AttendanceDto> attendanceDTOArrayList = attendanceBO.getAll();
 
         ObservableList<AttendanceTM> list = FXCollections.observableArrayList();
         for (AttendanceDto attendanceDto : attendanceDTOArrayList){

@@ -1,5 +1,7 @@
 package lk.ijse.the_thirsty_manager.DAO;
 
+import lk.ijse.the_thirsty_manager.Dto.AttendanceDto;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;

@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.AttendanceBO;
+import lk.ijse.the_thirsty_manager.BO.Custom.CustomerBO;
 import lk.ijse.the_thirsty_manager.Dto.AttendanceDto;
 import lk.ijse.the_thirsty_manager.Model.AttendanceManage.AddAttendanceModel;
 
@@ -36,6 +40,7 @@ public class AddAttendanceController implements Initializable {
 
     @FXML
     private TextField txtEmployeeID;
+    private AttendanceBO attendanceBO = BOFactory.getInstance().getBO(BOTypes.ATTENDANCE);
 
     @FXML
     void btnCloseOnAction(ActionEvent event) {
@@ -74,7 +79,7 @@ public class AddAttendanceController implements Initializable {
         }
 
         try {
-            boolean isFound = addAttendanceModel.findEmployee(empID);
+            boolean isFound = attendanceBO.searchEmpID(empID);
 
             if(isFound){
                 attendanceDto.setEmpID(empID);
@@ -84,7 +89,7 @@ public class AddAttendanceController implements Initializable {
                 return;
             }
 
-            boolean isSaved = addAttendanceModel.saveAttendance(attendanceDto);
+            boolean isSaved = attendanceBO.save(attendanceDto);
 
             if(isSaved){
                 infoSender("Attendance Reported" , null , "Attendance Report Success");
@@ -92,7 +97,6 @@ public class AddAttendanceController implements Initializable {
                 btnResetOnAction(null);
             }else{
                 errorSender("Not Reported" , null , "Attendance Not Reported");
-                loadID();
                 btnResetOnAction(null);
             }
         } catch (SQLException e) {
@@ -123,7 +127,7 @@ public class AddAttendanceController implements Initializable {
     }
     public void loadID(){
         try {
-            lblAttendanceID.setText(addAttendanceModel.getNextId());
+            lblAttendanceID.setText(attendanceBO.nextID());
         } catch (SQLException e) {
             e.printStackTrace();
         }

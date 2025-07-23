@@ -11,7 +11,7 @@ import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.CustomerBO;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
-import lk.ijse.the_thirsty_manager.Model.CustomerManageModel.SearchCustomerModel;
+
 
 import java.sql.SQLException;
 
@@ -44,7 +44,6 @@ public class SearchCustomerController {
         ancSearchCustomerpage.getChildren().clear();
         ancSearchCustomerpage.setVisible(false);
     }
-    private SearchCustomerModel searchCustomerModel = new SearchCustomerModel();
     public void searchCustomer(String cusID){
         try {
             CustomerDto searchCustomerDto = customerBO.searchCustomer(cusID);

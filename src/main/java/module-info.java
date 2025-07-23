@@ -23,7 +23,6 @@ module lk.ijse.the_thirsty_manager.finalproject {
     opens lk.ijse.the_thirsty_manager.Model.PaymentManageModel to javafx.fxml;
     opens lk.ijse.the_thirsty_manager.Controller.ItemManageController to javafx.fxml;
     opens lk.ijse.the_thirsty_manager.Controller.SalaryManageController to javafx.fxml;
-    opens lk.ijse.the_thirsty_manager.Model.CustomerManageModel to javafx.fxml;
     opens lk.ijse.the_thirsty_manager.Model.SalaryManageModel to javafx.fxml;
     opens lk.ijse.the_thirsty_manager.Dto.TM to javafx.fxml, javafx.base;
     opens lk.ijse.the_thirsty_manager.Controller.AttendanceManage to javafx.fxml;

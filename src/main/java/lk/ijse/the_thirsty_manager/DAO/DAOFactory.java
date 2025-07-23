@@ -1,6 +1,8 @@
 package lk.ijse.the_thirsty_manager.DAO;
 
-import lk.ijse.the_thirsty_manager.DAO.Custom.IMPL.CustomerDAOIMPL;
+import lk.ijse.the_thirsty_manager.BO.Custom.IMPL.ItemBOIMPL;
+import lk.ijse.the_thirsty_manager.DAO.Custom.IMPL.*;
+import lk.ijse.the_thirsty_manager.DAO.Custom.IMPL.OrderDetailsDAOIMPL;
 
 public class DAOFactory {
     private static DAOFactory daoFactory;
@@ -13,7 +15,20 @@ public class DAOFactory {
     }
 
     public <T extends SuperDAO> T getDAO(DAOTypes daoTypes) {
-        return (T) new CustomerDAOIMPL();
+        return switch (daoTypes) {
+            case CUSTOMER -> (T) new CustomerDAOIMPL();
+            case ORDER -> (T) new OrderDAOIMPL();
+            case ITEM -> (T) new ItemBOIMPL();
+            case INVENTORY -> (T) new InventoryDAOIMPL();
+            case SUPPLIER -> (T) new SupplierDAOIMPL();
+            case INGREDIENTS -> (T) new IngerdientsDAOIMPL();
+            case EMPLOYEE -> (T) new EmployeeDAOIMPL();
+            case PAYMENT -> (T) new PaymentDAOIMPL ();
+            case TABLE -> (T) new TableDAOIMPL();
+            case SALARY -> (T) new SalaryDAOIMPL();
+            case ATTENDANCE -> (T) new AttendanceDAOIMPL();
+            case ORDER_DETAILS -> (T) new OrderDetailsDAOIMPL();
+        };
 
     }
 

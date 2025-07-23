@@ -10,7 +10,7 @@ import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.CustomerBO;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
-import lk.ijse.the_thirsty_manager.Model.CustomerManageModel.DeleteCustomerModel;
+
 
 import java.sql.SQLException;
 
@@ -49,7 +49,7 @@ public class DeleteCustomerController {
     String delCusID;
 
 
-    private final DeleteCustomerModel deleteCustomerModel= new DeleteCustomerModel();
+
     @FXML
     void btnCloseOnAction(ActionEvent event) {
         ancDeleteCUstomer.getChildren().clear();

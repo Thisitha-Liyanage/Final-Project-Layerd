@@ -1,6 +1,6 @@
 package lk.ijse.the_thirsty_manager.BO;
 
-import lk.ijse.the_thirsty_manager.BO.Custom.IMPL.CustomerBOIMPL;
+import lk.ijse.the_thirsty_manager.BO.Custom.IMPL.*;
 
 public class BOFactory {
     private static BOFactory boFactory;
@@ -12,7 +12,20 @@ public class BOFactory {
     }
 
     public <T extends SuperBO> T getBO(BOTypes boType) {
-        return (T) new CustomerBOIMPL();
+        return switch (boType) {
+            case CUSTOMER -> (T) new CustomerBOIMPL();
+            case ORDER -> (T) new OrderBOIMPL();
+            case ITEM -> (T) new ItemBOIMPL();
+            case INVENTORY -> (T) new InventoryBOIMPL();
+            case SUPPLIER -> (T) new SupplierBOIMPL();
+            case INGREDIENTS -> (T) new IngredeintBOIMPL();
+            case EMPLOYEE -> (T) new EmployeeBOIMPL();
+            case PAYMENT -> (T) new PaymentBOIMPL();
+            case TABLE -> (T) new TableBOIMPL();
+            case SALARY -> (T) new SalaryBOIMPL();
+            case ATTENDANCE -> (T) new AttendanceBOIMPL();
+            case ORDER_DETAILS -> (T) new OrderDetailsIMPL();
+        };
 
     }
 }

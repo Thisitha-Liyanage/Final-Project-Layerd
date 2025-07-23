@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.AttendanceBO;
 import lk.ijse.the_thirsty_manager.Dto.AttendanceDto;
 import lk.ijse.the_thirsty_manager.Model.AttendanceManage.SearchAttendanceModel;
 
@@ -34,12 +37,13 @@ public class SearchAttendanceController {
         ancAttendanceManage.getChildren().clear();
         ancAttendanceManage.setVisible(false);
     }
-    private SearchAttendanceModel searchAttendanceModel = new SearchAttendanceModel();
+
+    private AttendanceBO attendanceBO = BOFactory.getInstance().getBO(BOTypes.ATTENDANCE);
+
     public void searchAttend(String attID){
         try {
 
-            AttendanceDto attendanceDto = searchAttendanceModel.searchAttend(attID);
-
+            AttendanceDto attendanceDto = attendanceBO.search(attID);
             if(attendanceDto == null){
                 errorSender("ID Not Found" , null , "Attendance ID Not Found");
                 btnCloseOnAction(null);

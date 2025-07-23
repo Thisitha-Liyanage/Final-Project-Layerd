@@ -45,8 +45,7 @@ public class CustomerBOIMPL implements CustomerBO {
         List<CustomerEntity> customerEntityList = customerDAO.getAll();
         ModelMapper modelMapper = new ModelMapper();
         Type listType = new TypeToken<List<CustomerDto>>() {}.getType();
-        List<CustomerDto> customerDtoList = modelMapper.map(customerEntityList, listType);
-        return customerDtoList;
+        return modelMapper.map(customerEntityList, listType);
     }
 
     @Override
