@@ -6,13 +6,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.EmployeeBO;
 import lk.ijse.the_thirsty_manager.Dto.EmployeeDto;
 import lk.ijse.the_thirsty_manager.Model.EmployeeManageModel.UpdateEmployeeModel;
 
 import java.sql.SQLException;
 
 public class UpdateEmployeeCOntroller {
-
+    private final EmployeeBO employeeBO = BOFactory.getInstance().getBO(BOTypes.EMPLOYEE);
     @FXML
     private AnchorPane ancUpdateEmployee;
 
@@ -49,18 +52,17 @@ public class UpdateEmployeeCOntroller {
         ancUpdateEmployee.setVisible(false);
     }
 
-    private UpdateEmployeeModel updateEmployeeModel = new UpdateEmployeeModel();
+
     @FXML
     void btnFindOnActon(ActionEvent event) {
-        EmployeeDto employeeDto = new EmployeeDto();
         String empID = txtEmployeeID.getText();
         if (empID.isEmpty()) {
             errorSender("ERROR" , null , "Enter Employee ID");
             return;
         }
-        employeeDto.setEmployeeID(empID);
+
         try {
-            EmployeeDto findEmpDto = updateEmployeeModel.findEmployee(employeeDto);
+            EmployeeDto findEmpDto = employeeBO.search(empID);
             if(findEmpDto == null){
                 errorSender("ID Not Found" , null , "Employee ID Not Found");
                 btnResetOnAction(null);
@@ -131,7 +133,7 @@ public class UpdateEmployeeCOntroller {
         employeeDto.setSPD(sPDD);
 
         try{
-            boolean isUpdate = updateEmployeeModel.updateEmployee(employeeDto);
+            boolean isUpdate = employeeBO.update(employeeDto);
 
             if(isUpdate){
                 infoSender("Employee Updated" , null , "Employee Updated Success");

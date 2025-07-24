@@ -13,6 +13,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.EmployeeBO;
 import lk.ijse.the_thirsty_manager.Controller.EmployeeManageController.SearchEmployeeController;
 import lk.ijse.the_thirsty_manager.Controller.ItemManageController.SearchItemController;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
@@ -25,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EmployeePageController implements Initializable {
@@ -64,7 +68,7 @@ public class EmployeePageController implements Initializable {
     @FXML
     private TableView<EmployeeTM> tableVieweEmployee;
 
-
+    private final EmployeeBO employeeBO = BOFactory.getInstance().getBO(BOTypes.EMPLOYEE);
     @FXML
     void btnAddEmployeeOnAction(ActionEvent event) {
         manageLoader("/View/EmployeeManage/AddEmployee.fxml");
@@ -143,12 +147,9 @@ public class EmployeePageController implements Initializable {
         }
 
     }
-    private EmployeePageModel employeePageModel = new EmployeePageModel();
-    private EmployeeTM employeeTM = new EmployeeTM();
-    public void loadTable() throws SQLException {
+        public void loadTable() throws SQLException {
 
-        ArrayList<EmployeeDto> employeeDTOArrayList = employeePageModel.getAllEmployee();
-
+        List<EmployeeDto> employeeDTOArrayList = employeeBO.getAll();
         ObservableList<EmployeeTM> list = FXCollections.observableArrayList();
         for (EmployeeDto employeeDto : employeeDTOArrayList) {
             EmployeeTM employeeTM = new EmployeeTM(
@@ -158,8 +159,10 @@ public class EmployeePageController implements Initializable {
                     employeeDto.getContact(),
                     employeeDto.getSPD()
             );
+
             list.add(employeeTM);
         }
+
         tableVieweEmployee.setItems(list);
     }
 

@@ -6,6 +6,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.EmployeeBO;
 import lk.ijse.the_thirsty_manager.Dto.EmployeeDto;
 import lk.ijse.the_thirsty_manager.Model.EmployeeManageModel.DeleteEmployeeModel;
 
@@ -49,7 +52,8 @@ public class DeleteEmployeeController {
         ancDeleteEmployee.setVisible(false);
     }
 
-    private DeleteEmployeeModel deleteEmployeeModel = new DeleteEmployeeModel();
+    private final EmployeeBO employeeBO = BOFactory.getInstance().getBO(BOTypes.EMPLOYEE);
+
     @FXML
     void btnFindOnActon(ActionEvent event) {
         String empID = txtEmployeeID.getText();
@@ -57,7 +61,7 @@ public class DeleteEmployeeController {
         employeeDto.setEmployeeID(empID);
 
         try {
-            EmployeeDto findEmp = deleteEmployeeModel.findEmployee(employeeDto);
+            EmployeeDto findEmp = employeeBO.search(empID);
             if(findEmp == null){
                 errorSender("ID Not Found" , null ," Employee ID Not Found");
                 btnResetOnAction(null);
@@ -90,11 +94,8 @@ public class DeleteEmployeeController {
 
     public void btnDeleteOnAction(ActionEvent event) {
         String empID = txtEmployeeID.getText();
-        EmployeeDto employeeDto = new EmployeeDto();
-        employeeDto.setEmployeeID(empID);
-
         try {
-            boolean isDelete = deleteEmployeeModel.deleteEmp(employeeDto);
+            boolean isDelete = employeeBO.delete(empID);
 
             if(isDelete){
                 infoSender("Employee Deleted" , null , "Employee Delete Success");

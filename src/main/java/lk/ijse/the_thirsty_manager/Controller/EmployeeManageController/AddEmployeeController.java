@@ -8,6 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.EmployeeBO;
 import lk.ijse.the_thirsty_manager.Dto.EmployeeDto;
 import lk.ijse.the_thirsty_manager.Model.EmployeeManageModel.AddEmployeeModel;
 
@@ -18,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class AddEmployeeController implements Initializable {
 
+    private final EmployeeBO employeeBO = BOFactory.getInstance().getBO(BOTypes.EMPLOYEE);
     @FXML
     private AnchorPane ancAddEmployee;
 
@@ -59,7 +63,7 @@ public class AddEmployeeController implements Initializable {
         txtEmployeeSPD.clear();
     }
 
-    private AddEmployeeModel addEmployeeModel = new AddEmployeeModel();
+
     @FXML
     void btnSaveOnAction(ActionEvent event) throws SQLException {
 
@@ -100,11 +104,11 @@ public class AddEmployeeController implements Initializable {
             employeeDto.setSPD(sPDD);
 
         try {
-            boolean isSaved = addEmployeeModel.saveEmployee(employeeDto);
+            boolean isSaved = employeeBO.save(employeeDto);
 
             if(isSaved){
                 infoSender("Saved" , null , "Customer Saved Success");
-                lblEmployeeID.setText(addEmployeeModel.getNextId());
+                loadNextID();
                 btnResetOnAction(null);
             }else{
                 errorSender("Not Saved" , null , "Employee Not Saved");
@@ -113,6 +117,7 @@ public class AddEmployeeController implements Initializable {
 
         } catch (SQLException e) {
             errorSender("ERROR" , null , "Internal Database Error");
+            e.printStackTrace();
             btnResetOnAction(null);
         }
     }
@@ -139,7 +144,7 @@ public class AddEmployeeController implements Initializable {
 
     public void loadNextID(){
         try {
-            lblEmployeeID.setText(addEmployeeModel.getNextId());
+            lblEmployeeID.setText(employeeBO.nextID());
         } catch (SQLException e) {
             e.printStackTrace();
         }
