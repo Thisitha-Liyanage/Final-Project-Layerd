@@ -1,14 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.the_thirsty_manager.Controller.ManageIngerdientController.SearchIngredientController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane fx:id="ancSearchIngPage" prefHeight="459.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.the_thirsty_manager.Controller.ManageIngerdientController.SearchIngredientController">
+   <children>
+      <AnchorPane prefHeight="459.0" prefWidth="699.0" style="-fx-background-color: #c23616;">
+         <children>
+            <ImageView fitHeight="459.0" fitWidth="701.0" layoutX="-1.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../Image/mnage.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="249.0" layoutY="21.0" style="-fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Search Ingredients" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Math" size="25.0" />
+               </font>
+            </Label>
+            <VBox layoutX="14.0" layoutY="103.0" prefHeight="345.0" prefWidth="189.0" spacing="50.0">
+               <children>
+                  <Label text="Ingredient ID" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Math" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Item ID" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Math" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Inventory ID" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Math" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Stock Use" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Math" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox layoutX="216.0" layoutY="169.0" prefHeight="274.0" prefWidth="453.0" spacing="45.0">
+               <children>
+                  <TextField fx:id="txtItemID" editable="false" prefHeight="27.0" prefWidth="453.0" promptText="Item ID" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1 0; -fx-text-fill: white; -fx-prompt-text-fill: white;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <TextField fx:id="txtInventoryID" editable="false" promptText="Inventory ID" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1 0; -fx-text-fill: white; -fx-prompt-text-fill: white;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <TextField fx:id="txtStockUse" editable="false" promptText="Stock Use" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 1 0; -fx-text-fill: white; -fx-prompt-text-fill: white;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+               </children>
+            </VBox>
+            <Label fx:id="lblIngredientID" layoutX="216.0" layoutY="103.0" prefHeight="22.0" prefWidth="211.0" style="-fx-border-color: white; -fx-border-width: 0 0 1 0;" text="R001" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnClose" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#btnCloseOnAction" prefHeight="22.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 100;" text="x" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>

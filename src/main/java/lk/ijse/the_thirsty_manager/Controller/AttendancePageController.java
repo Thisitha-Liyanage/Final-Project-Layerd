@@ -127,7 +127,6 @@ public class AttendancePageController implements Initializable {
         manageLoad("/View/AttendanceManage/AddAttendance.fxml");
     }
 
-
     private final AttendanceBO attendanceBO = BOFactory.getInstance().getBO(BOTypes.ATTENDANCE);
     public void loadTable() throws SQLException {
         List<AttendanceDto> attendanceDTOArrayList = attendanceBO.getAll();

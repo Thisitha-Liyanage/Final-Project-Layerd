@@ -8,6 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.IngredientBO;
+import lk.ijse.the_thirsty_manager.BO.Exceptions.IDNotFoundException;
 import lk.ijse.the_thirsty_manager.Dto.IngredientDto;
 import lk.ijse.the_thirsty_manager.Model.IngerdientModel;
 import lk.ijse.the_thirsty_manager.Model.IngredientManageModel.AddIngredient;
@@ -55,7 +59,7 @@ public class AddIngredientController implements Initializable {
     }
 
     private final AddIngredient addIngredientModel = new AddIngredient();
-
+    private final IngredientBO ingredientBO = BOFactory.getInstance().getBO(BOTypes.INGREDIENTS);
     @FXML
     void btnSaveOnAction(ActionEvent event) {
         String igreID = lblIngredientID.getText();
@@ -77,27 +81,21 @@ public class AddIngredientController implements Initializable {
             errorSender("ERROR" , null , "Stock Use Must Be Numbers");
         }
 
-        boolean isItemFound = false;
         try {
-            isItemFound  = addIngredientModel.findItemID(itemID);
+            ingredientBO.findItem(itemID);
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
-        if(!isItemFound){
+        }catch (IDNotFoundException e){
             errorSender("ID Not Found" , null , "ItemID Not Found");
             btnResetOnAction(null);
             return;
         }
 
-        boolean isInventoryFound = false;
         try {
-            isInventoryFound  = addIngredientModel.findInvenID(invenID);
+            ingredientBO.findInvenID(invenID);
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
-        if(!isInventoryFound){
+        }catch (IDNotFoundException e){
             errorSender("ID Not Found" , null , "Inventory ID Not Found");
             btnResetOnAction(null);
             return;
@@ -115,7 +113,7 @@ public class AddIngredientController implements Initializable {
 
         boolean isSaved =false;
         try {
-            isSaved = addIngredientModel.saveIngerdients(ingredientDto);
+            isSaved = ingredientBO.save(ingredientDto);
         } catch (SQLException e) {
             e.printStackTrace();
         }
