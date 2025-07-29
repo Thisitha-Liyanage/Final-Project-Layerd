@@ -10,6 +10,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.ItemBO;
 import lk.ijse.the_thirsty_manager.Controller.CustomerManageController.SearchCustomerController;
 import lk.ijse.the_thirsty_manager.Controller.ItemManageController.SearchItemController;
 import lk.ijse.the_thirsty_manager.Dto.InventoryDto;
@@ -22,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ItemPageController implements Initializable {
@@ -131,8 +135,6 @@ public class ItemPageController implements Initializable {
         navigatTo("/View/OrderPage.fxml");
     }
 
-    public void btnOrderDetailsOnAction(ActionEvent event) {
-    }
 
     public void btnTableOnActon(ActionEvent event) {
         navigatTo("/View/TablePage.fxml");
@@ -161,14 +163,15 @@ public class ItemPageController implements Initializable {
             e.printStackTrace();
         }
     }
+    private final ItemBO itemBO = BOFactory.getInstance().getBO(BOTypes.ITEM);
 
-    private ItemPageModel itemPageModel = new ItemPageModel();
+
     public void loadTable() {
         try {
-            ArrayList<ItemDto> itemDtoArrayList = itemPageModel.getAllItems();
+            List<ItemDto> itemDtoList = itemBO.getAll();
             ObservableList<ItemTM> observableList = FXCollections.observableArrayList();
 
-            for (ItemDto dto : itemDtoArrayList) {
+            for (ItemDto dto : itemDtoList) {
                 observableList.add(new ItemTM(
                         dto.getItemID(),
                         dto.getItemName(),

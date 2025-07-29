@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.ItemBO;
 import lk.ijse.the_thirsty_manager.Dto.ItemDto;
 import lk.ijse.the_thirsty_manager.Model.ItemManageModel.UpdateItemModel;
 
@@ -51,15 +54,19 @@ public class UpdateItemController {
         ancUpdateItem.setVisible(false);
     }
 
-    private UpdateItemModel updateItemModel = new UpdateItemModel();
+    private final ItemBO itemBO = BOFactory.getInstance().getBO(BOTypes.ITEM);
     @FXML
     void btnFind(ActionEvent event) throws SQLException {
-        ItemDto findItemDto = updateItemModel.findItem(txtItemID.getText());
+        ItemDto findItemDto = itemBO.search(txtItemID.getText());
 
         if(findItemDto == null){
             errorSender("ID not Found" , null , "Item ID not Found");
             btnResetOnAction(null);
         }else{
+
+            System.out.println(findItemDto.getItemName());
+            System.out.println(findItemDto.getDescription());
+            System.out.println(findItemDto.getPrice());
 
             txtItemName.setText(findItemDto.getItemName());
             txtDescription.setText(findItemDto.getDescription());
@@ -85,6 +92,7 @@ public class UpdateItemController {
     }
 
     @FXML
+
     void btnUpdateOnAction(ActionEvent event) {
 
         String itemID = txtItemID.getText();
@@ -113,9 +121,11 @@ public class UpdateItemController {
             btnResetOnAction(null);
         }
 
+        ItemDto itemDTO = new ItemDto(itemID , itemName , available , priceD , itemDes);
+
         boolean isUpdated = false;
         try {
-            isUpdated = updateItemModel.updateItem(itemName , itemDes , available , priceD , itemID);
+            isUpdated = itemBO.update(itemDTO);
         } catch (SQLException e) {
             errorSender("ERROR" , null , "Internal Database Error");
         }

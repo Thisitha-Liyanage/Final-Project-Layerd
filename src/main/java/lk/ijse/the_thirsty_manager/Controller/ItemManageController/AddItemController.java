@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.ItemBO;
 import lk.ijse.the_thirsty_manager.Dto.ItemDto;
 import lk.ijse.the_thirsty_manager.Model.ItemManageModel.AddItemModel;
 
@@ -54,18 +57,25 @@ public class AddItemController implements Initializable {
         txtPrice.clear();
         ckeckBoxAvailability.setSelected(false);
     }
-
+    private final ItemBO itemBO = BOFactory.getInstance().getBO(BOTypes.ITEM);
     private ItemDto itemDto = new ItemDto();
-    private AddItemModel addItemModel = new AddItemModel();
+
 
     @FXML
     void btnSaveOnAction(ActionEvent event) throws SQLException {
         itemDto.setItemID(lblItemID.getText());
-        lblItemID.setText(addItemModel.getNextId());
+        lblItemID.setText(itemBO.nextID());
         String itemName = txtItemName.getText();
         String itemDescrip = txtDescription.getText();
         String itemPrice = txtPrice.getText();
         boolean isAvailable = ckeckBoxAvailability.isSelected();
+
+
+        if(itemName.isEmpty() || itemDescrip.isEmpty() || itemPrice.isEmpty()){
+            new Alert(Alert.AlertType.ERROR , "Fill All Missing Fields").show();
+            btnResetOnAction(null);
+            return;
+        }
 
         itemDto.setItemName(itemName);
         itemDto.setDescription(itemDescrip);
@@ -77,6 +87,7 @@ public class AddItemController implements Initializable {
         } catch (NumberFormatException e) {
             errorSender("Wrong Price Format", null, "Item Price must be number");
             btnResetOnAction(null);
+            return;
         }
 
         if (!isAvailable) {
@@ -87,7 +98,7 @@ public class AddItemController implements Initializable {
 
 
         try {
-            boolean isSaved = addItemModel.saveItem(itemDto);
+            boolean isSaved = itemBO.save(itemDto);
             if (!isSaved) {
                 errorSender("Not Saved", null, "Item Not Saved");
                 btnResetOnAction(null);
@@ -127,7 +138,7 @@ public class AddItemController implements Initializable {
 
     private void loadItemID() {
         try {
-            lblItemID.setText(addItemModel.getNextId());
+            lblItemID.setText(itemBO.nextID());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -18,7 +18,7 @@ public class DAOFactory {
         return switch (daoTypes) {
             case CUSTOMER -> (T) new CustomerDAOIMPL();
             case ORDER -> (T) new OrderDAOIMPL();
-            case ITEM -> (T) new ItemBOIMPL();
+            case ITEM -> (T) new ItemDAOIMPL();
             case INVENTORY -> (T) new InventoryDAOIMPL();
             case SUPPLIER -> (T) new SupplierDAOIMPL();
             case INGREDIENTS -> (T) new IngerdientsDAOIMPL();

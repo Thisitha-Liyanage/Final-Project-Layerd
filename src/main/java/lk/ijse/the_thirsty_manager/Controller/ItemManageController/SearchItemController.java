@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.ItemBO;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Dto.ItemDto;
 import lk.ijse.the_thirsty_manager.Model.ItemManageModel.SearchItemModel;
@@ -42,11 +45,11 @@ public class SearchItemController {
         ancSearchItem.setVisible(false);
     }
 
-    private SearchItemModel searchItemModel = new SearchItemModel();
+    private final ItemBO itemBO = BOFactory.getInstance().getBO(BOTypes.ITEM);
 
     public void searchItem (String itemID){
         try {
-            ItemDto searchItemDto = searchItemModel.searchItem(itemID);
+            ItemDto searchItemDto = itemBO.search(itemID);
 
             if (searchItemDto != null){
                 if(itemID.isEmpty()){

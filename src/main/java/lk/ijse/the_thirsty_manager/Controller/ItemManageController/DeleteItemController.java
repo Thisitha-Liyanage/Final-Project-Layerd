@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.ItemBO;
 import lk.ijse.the_thirsty_manager.Dto.ItemDto;
 import lk.ijse.the_thirsty_manager.Model.ItemManageModel.DeleteItemModel;
 
@@ -49,12 +52,12 @@ public class DeleteItemController {
         ancItemDelete.setVisible(false);
         ancItemDelete.getChildren().clear();
     }
-
+    private final ItemBO itemBO = BOFactory.getInstance().getBO(BOTypes.ITEM);
     private DeleteItemModel deleteItemModel = new DeleteItemModel();
     @FXML
     void btnFind(ActionEvent event) {
         try {
-            ItemDto findItemDto = deleteItemModel.findItem(txtItemID.getText());
+            ItemDto findItemDto = itemBO.search(txtItemID.getText());
             if(findItemDto == null){
                 errorSender("ID Not Found" ,null , "Item ID not Found");
             }else{
@@ -85,7 +88,7 @@ public class DeleteItemController {
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
         try {
-            boolean isDeleted = deleteItemModel.deleteItem(txtItemID.getText());
+            boolean isDeleted = itemBO.delete(txtItemID.getText());
             if(isDeleted){
                 infoSender("Deleted" , null , "Item Delete Success" );
                 btnResetOnAction(null);
