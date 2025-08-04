@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.PaymentBO;
 import lk.ijse.the_thirsty_manager.DB.DBConnection;
 import lk.ijse.the_thirsty_manager.Dto.PaymentDto;
 import lk.ijse.the_thirsty_manager.Model.PaymentManageModel.AddPaymentModel;
@@ -54,7 +57,6 @@ public class AddPaymentController implements Initializable {
     @FXML
     void btnResetOnAction(ActionEvent event) {
         SplitMenuPaymentMethod.setText("Payment Method");
-        txtDate.clear();
         txtOrderID.clear();
     }
     public void byCardOnAction(ActionEvent event) {
@@ -66,7 +68,7 @@ public class AddPaymentController implements Initializable {
         SplitMenuPaymentMethod.setText("By Cash");
         paymentDto.setPaymentMethod("Cash");
     }
-
+    private final PaymentBO paymentBO = BOFactory.getInstance().getBO(BOTypes.PAYMENT);
     private AddPaymentModel addPaymentModel = new AddPaymentModel();
     @FXML
     void btnSaveOnAction(ActionEvent event) {
@@ -79,7 +81,11 @@ public class AddPaymentController implements Initializable {
             btnResetOnAction(null);
             return;
         }
-
+        if(paymentDto.getTotalAmount() == null){
+            errorSender("Amount Is Empty" , null , "Fill order ID and Press 'Enter");
+            btnResetOnAction(null);
+            return;
+        }
         double amount = paymentDto.getTotalAmount();
 
         if(amount == 0){
@@ -93,7 +99,7 @@ public class AddPaymentController implements Initializable {
         paymentDto.setDate(txtDate.getText());
 
         try {
-            boolean isSaved = addPaymentModel.savePayment(paymentDto);
+            boolean isSaved = paymentBO.save(paymentDto);
 
             if(isSaved){
                 infoSender("Payment Saved" , null , "Payment Saved Success");
@@ -136,7 +142,7 @@ public class AddPaymentController implements Initializable {
     public void findOrderOnAction(ActionEvent event) {
         String oID = txtOrderID.getText();
         try {
-           PaymentDto findOrder = addPaymentModel.findOrder(oID);
+           PaymentDto findOrder = paymentBO.findOrder(oID);
 
             if(findOrder == null){
                 errorSender("ID Not Found" , null , "Order ID Not Found");
@@ -145,7 +151,7 @@ public class AddPaymentController implements Initializable {
                 paymentDto.setTotalAmount(findOrder.getTotalAmount());
                 txtAmount.setText(String.valueOf(findOrder.getTotalAmount()));
             }
-            boolean isDuplicated = addPaymentModel.checkDuplicateOrder(oID);
+            boolean isDuplicated = paymentBO.duplicate(oID);
             System.out.println(isDuplicated);
 
             if(isDuplicated) {
@@ -162,7 +168,7 @@ public class AddPaymentController implements Initializable {
     }
     public void loadID(){
         try {
-            lblPaymentID.setText(addPaymentModel.getNextId());
+            lblPaymentID.setText(paymentBO.nextID());
         } catch (SQLException e) {
             e.printStackTrace();
         }

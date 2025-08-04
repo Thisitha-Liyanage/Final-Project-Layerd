@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.PaymentBO;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Dto.PaymentDto;
 import lk.ijse.the_thirsty_manager.Dto.SalaryDto;
@@ -41,12 +44,12 @@ public class SearchPaymentController {
         ancSearchPayment.getChildren().clear();
         ancSearchPayment.setVisible(false);
     }
-
+    private final PaymentBO paymentBO = BOFactory.getInstance().getBO(BOTypes.PAYMENT);
     private SearchPaymentModel searchPaymentModel = new SearchPaymentModel();
     public void searchPayment(String payID){
         paymentDto.setPaymentID(payID);
         try {
-            PaymentDto searchPaymentDto = searchPaymentModel.findPayment(paymentDto);
+            PaymentDto searchPaymentDto = paymentBO.searchByID(payID);
 
             if (searchPaymentDto != null){
                 if(payID.isEmpty()){

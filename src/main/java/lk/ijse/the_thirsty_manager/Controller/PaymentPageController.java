@@ -13,6 +13,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.PaymentBO;
 import lk.ijse.the_thirsty_manager.Controller.CustomerManageController.SearchCustomerController;
 import lk.ijse.the_thirsty_manager.Controller.PaymentManageController.SearchPaymentController;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
@@ -25,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PaymentPageController implements Initializable {
@@ -78,10 +82,6 @@ public class PaymentPageController implements Initializable {
         navigateTo("/View/PaymentPage.fxml");
     }
 
-    @FXML
-    void btnOrderDetailsOnAction(ActionEvent event) {
-
-    }
 
     @FXML
     void btnPlaceOrderOnAction(ActionEvent event) {
@@ -155,11 +155,11 @@ public class PaymentPageController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    private final PaymentBO paymentBO = BOFactory.getInstance().getBO(BOTypes.PAYMENT);
     private PaymentModel paymentModel = new PaymentModel();
     public void loadTable() throws SQLException {
 
-        ArrayList<PaymentDto> paymentDTOArrayList = paymentModel.getAllPayments();
+        List<PaymentDto> paymentDTOArrayList = paymentBO.getAll();
 
         ObservableList<PaymentTM> list = FXCollections.observableArrayList();
         for (PaymentDto paymentDto : paymentDTOArrayList){
