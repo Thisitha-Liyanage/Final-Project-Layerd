@@ -8,9 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.SupplierBO;
 import lk.ijse.the_thirsty_manager.Dto.EmployeeDto;
 import lk.ijse.the_thirsty_manager.Dto.SupplierDto;
-import lk.ijse.the_thirsty_manager.Model.SupplierManageModel.AddSupplierModel;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -54,7 +56,7 @@ public class AddSupplierController implements Initializable {
         txtAddress.clear();
         txtContact.clear();
     }
-    private AddSupplierModel addSupplierModel = new AddSupplierModel();
+    private final SupplierBO supplierBO = BOFactory.getInstance().getBO(BOTypes.SUPPLIER);
 
     private SupplierDto supplierDto = new SupplierDto();
     @FXML
@@ -80,11 +82,11 @@ public class AddSupplierController implements Initializable {
         supplierDto.setName(name);
 
         try{
-          boolean isSaved = addSupplierModel.saveSupplier(supplierDto);
+          boolean isSaved = supplierBO.save(supplierDto);
 
           if(isSaved){
               infoSender("Saved" , null , "Supplier Saved Success");
-              lblSupplierID.setText(addSupplierModel.getNextId());
+              lblSupplierID.setText(supplierBO.nextID());
               btnResetOnAction(null);
           }else{
               errorSender("Not Saved", null, "Supplier Not Saved");
@@ -120,7 +122,7 @@ public class AddSupplierController implements Initializable {
     }
     public void loadID(){
         try {
-            lblSupplierID.setText(addSupplierModel.getNextId());
+            lblSupplierID.setText(supplierBO.nextID());
         } catch (SQLException e) {
             e.printStackTrace();
         }

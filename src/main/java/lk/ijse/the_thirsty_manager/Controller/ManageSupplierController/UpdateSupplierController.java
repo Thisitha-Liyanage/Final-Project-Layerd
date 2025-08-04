@@ -6,6 +6,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.SupplierBO;
 import lk.ijse.the_thirsty_manager.Dto.SupplierDto;
 import lk.ijse.the_thirsty_manager.Model.SupplierManageModel.UpdateSupplierModel;
 
@@ -46,7 +49,7 @@ public class UpdateSupplierController {
         ancUpdateSUp.setVisible(false);
     }
 
-    private UpdateSupplierModel updateSupplierModel = new UpdateSupplierModel();
+    private final SupplierBO supplierBO = BOFactory.getInstance().getBO(BOTypes.SUPPLIER);
     private SupplierDto supplierDto = new SupplierDto();
     @FXML
     void btnFindOnAction(ActionEvent event) {
@@ -61,7 +64,7 @@ public class UpdateSupplierController {
         supplierDto.setSupID(ID);
 
         try {
-            SupplierDto findSup = updateSupplierModel.findSupplier(supplierDto);
+            SupplierDto findSup =supplierBO.searchById(ID);
 
             if(findSup == null){
                 errorSender("ID Not Found" , null , "Supplier ID not Found");
@@ -111,7 +114,7 @@ public class UpdateSupplierController {
         supplierDto.setAddress(address);
 
         try{
-            boolean isUpdate = updateSupplierModel.updateSup(supplierDto);
+            boolean isUpdate =supplierBO.update(supplierDto);
 
             if(isUpdate){
               infoSender("Supplier Updated" , null , "Supplier Updated Success");

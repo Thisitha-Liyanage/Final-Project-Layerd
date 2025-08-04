@@ -6,6 +6,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.SupplierBO;
+import lk.ijse.the_thirsty_manager.BO.SuperBO;
 import lk.ijse.the_thirsty_manager.Dto.SupplierDto;
 import lk.ijse.the_thirsty_manager.Dto.TM.SupplierTM;
 import lk.ijse.the_thirsty_manager.Model.SupplierManageModel.SearchSupplierModel;
@@ -37,6 +41,7 @@ public class SearchSupplierCOntroller {
         ancSearchSupplier.getChildren().clear();
         ancSearchSupplier.setVisible(false);
     }
+    private final SupplierBO supplierBO = BOFactory.getInstance().getBO(BOTypes.SUPPLIER);
     private SupplierDto supplierDto = new SupplierDto();
     public void searchSup(String supID){
         if(supID == null){
@@ -47,10 +52,8 @@ public class SearchSupplierCOntroller {
 
         supplierDto.setSupID(supID);
 
-        SearchSupplierModel searchSupplierModel = new SearchSupplierModel();
-
         try{
-            SupplierDto findDto = searchSupplierModel.findSupplier(supplierDto);
+            SupplierDto findDto = supplierBO.searchById(supID);
 
             if(findDto == null){
                 errorSender("ID not Found" , null , "Supplier ID Not Found");

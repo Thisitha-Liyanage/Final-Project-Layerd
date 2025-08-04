@@ -6,8 +6,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.SupplierBO;
 import lk.ijse.the_thirsty_manager.Dto.SupplierDto;
-import lk.ijse.the_thirsty_manager.Model.SupplierManageModel.DeleteSupplierModel;
+
 
 import java.sql.SQLException;
 
@@ -45,11 +48,11 @@ public class DeleteSupplierController {
         ancDeleteSup.getChildren().clear();
         ancDeleteSup.setVisible(false);
     }
-
+    private final SupplierBO supplierBO = BOFactory.getInstance().getBO(BOTypes.SUPPLIER);
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
         try {
-            boolean isDeleted = deleteSupplierModel.deleteSup(supplierDto);
+            boolean isDeleted = supplierBO.delete(txtSupID.getText());
 
             if(isDeleted){
                 infoSender("Supplier Deleted" , null , "Supplier Deleted Success");
@@ -69,7 +72,6 @@ public class DeleteSupplierController {
 
     private SupplierDto supplierDto = new SupplierDto();
 
-    private DeleteSupplierModel deleteSupplierModel = new DeleteSupplierModel();
     @FXML
     void btnFindOnAction(ActionEvent event) {
         String supID = txtSupID.getText();
@@ -82,7 +84,7 @@ public class DeleteSupplierController {
         supplierDto.setSupID(supID);
 
         try {
-            SupplierDto findDto = deleteSupplierModel.findSupplier(supplierDto);
+            SupplierDto findDto = supplierBO.searchById(supID);
 
             if(findDto == null){
                 errorSender("ID not Found" , null , "Supplier ID Not Found");

@@ -10,6 +10,7 @@
     <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/DAO/Custom/IMPL/IngerdientsDAOIMPL.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/DAO/Custom/IMPL/ItemDAOIMPL.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/DAO/Custom/IMPL/PaymentDAOIMPL.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/DAO/Custom/IMPL/SupplierDAOIMPL.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/AttendanceManage/AddAttendanceModel.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/AttendanceManage/SearchAttendanceModel.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/lk/ijse/the_thirsty_manager/Model/AttendancePageModel.java" dialect="GenericSQL" />
