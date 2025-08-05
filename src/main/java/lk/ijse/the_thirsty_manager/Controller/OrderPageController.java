@@ -34,6 +34,8 @@ public class OrderPageController implements Initializable {
 
     public TextField txtItemName;
 
+
+
     @FXML
     private TextField txtTableID;
 
@@ -171,7 +173,6 @@ public class OrderPageController implements Initializable {
 
     @FXML
     void placeOrderOnAction(ActionEvent event) {
-
     }
     private OrderDto orderDto = new OrderDto();
     @FXML

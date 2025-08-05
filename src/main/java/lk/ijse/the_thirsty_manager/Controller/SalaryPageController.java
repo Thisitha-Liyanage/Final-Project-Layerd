@@ -13,6 +13,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.SalaryBO;
 import lk.ijse.the_thirsty_manager.Controller.CustomerManageController.SearchCustomerController;
 import lk.ijse.the_thirsty_manager.Controller.SalaryManageController.AddSalaryController;
 import lk.ijse.the_thirsty_manager.Controller.SalaryManageController.SearchSalaryController;
@@ -28,6 +31,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SalaryPageController implements Initializable {
@@ -89,7 +93,7 @@ public class SalaryPageController implements Initializable {
     void btnSalaryOnAction(ActionEvent event) {
         navigateTo("/View/SalaryPage.fxml");
     }
-
+    private final SalaryBO salaryBO = BOFactory.getInstance().getBO(BOTypes.SALARY);
     private SearchSalaryController searchSalaryController = new SearchSalaryController();
     @FXML
     void btnSearchOnAction(ActionEvent event) {
@@ -133,10 +137,9 @@ public class SalaryPageController implements Initializable {
             e.printStackTrace();
         }
     }
-    private SalaryPageModel salaryPageModel = new SalaryPageModel();
     public void loadTable() throws SQLException {
 
-        ArrayList<SalaryDto> salaryDTOArrayList = salaryPageModel.getAllSalary();
+        List<SalaryDto> salaryDTOArrayList = salaryBO.getAll();
 
         ObservableList<SalaryTM> list = FXCollections.observableArrayList();
         for (SalaryDto salaryDto : salaryDTOArrayList){

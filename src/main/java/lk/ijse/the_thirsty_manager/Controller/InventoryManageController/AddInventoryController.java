@@ -5,6 +5,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.InventoryBO;
+import lk.ijse.the_thirsty_manager.DAO.Custom.InventoryDAO;
+import lk.ijse.the_thirsty_manager.DAO.DAOFactory;
+import lk.ijse.the_thirsty_manager.DAO.DAOTypes;
 import lk.ijse.the_thirsty_manager.Dto.InventoryDto;
 import lk.ijse.the_thirsty_manager.Model.InventoryManageModel.AddInventoryModel;
 
@@ -74,11 +80,11 @@ public class AddInventoryController implements Initializable {
         txtCurrentStock.clear();
         SplitMenuUnit.setText("Choose Unit Type");
     }
-    private AddInventoryModel addInventoryModel = new AddInventoryModel();
+    private final InventoryBO inventoryBO = BOFactory.getInstance().getBO(BOTypes.INVENTORY);
     @FXML
     void btnSaveOnAction(ActionEvent event) throws SQLException {
         inventoryDto.setInventoryID(lblInventoryID.getText());
-        String inventoryID  = addInventoryModel.getNextId();
+        String inventoryID  = inventoryBO.nextID();
         String invName = txtInventoryName.getText();
         String invUnit = inventoryDto.getUnit();
         String supID = txtSupplierID.getText();
@@ -106,7 +112,7 @@ public class AddInventoryController implements Initializable {
                 btnResetOnAction(null);
                 return;
             }
-            if (addInventoryModel.findSupplier(supID)) {
+            if (inventoryBO.findSup(supID)) {
                 inventoryDto.setInventoryID(inventoryID);
                 inventoryDto.setInvname(invName);
                 inventoryDto.setCurrentStock(current_stock);
@@ -119,10 +125,10 @@ public class AddInventoryController implements Initializable {
                 return;
             }
         }
-        if(addInventoryModel.addInventory(inventoryDto)){
+        if(inventoryBO.save(inventoryDto)){
             infoSender("Success" , null , "Stock Saved Success");
             btnResetOnAction(null);
-            lblInventoryID.setText(addInventoryModel.getNextId());
+            lblInventoryID.setText(inventoryBO.nextID());
         }
     }
 
@@ -144,7 +150,7 @@ public class AddInventoryController implements Initializable {
 
     private void loadInvID() {
         try {
-            lblInventoryID.setText(addInventoryModel.getNextId());
+            lblInventoryID.setText(inventoryBO.nextID());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

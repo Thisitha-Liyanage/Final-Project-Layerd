@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.InventoryBO;
 import lk.ijse.the_thirsty_manager.Dto.InventoryDto;
 import lk.ijse.the_thirsty_manager.Model.InventoryManageModel.UpdateInventoryModel;
 import lk.ijse.the_thirsty_manager.Model.ItemManageModel.UpdateItemModel;
@@ -64,13 +67,13 @@ public class UpdateInventoryController {
         ancUpdateInventory.setVisible(false);
     }
 
-    private UpdateInventoryModel updateInventoryModel = new UpdateInventoryModel();
+    private final InventoryBO inventoryBO = BOFactory.getInstance().getBO(BOTypes.INVENTORY);
     @FXML
     void btnFindOnAction(ActionEvent event) {
         InventoryDto findInv;
         String invID = txtInventoryID.getText();
         try {
-            findInv = updateInventoryModel.findInv(invID);
+            findInv = inventoryBO.searchById(invID);
             if(findInv == null){
                 errorSender("ID not Found" , null , "Inventory ID Not Found");
                 btnResetOnAction(null);
@@ -132,7 +135,7 @@ public class UpdateInventoryController {
                     stockD = Double.parseDouble(stock);
                     reOrderLVD = Double.parseDouble(reOrderLV);
 
-                    if(updateInventoryModel.findSupplier(supID)){
+                    if(inventoryBO.findSup(supID)){
                         updateDto.setInventoryID(invID);
                         updateDto.setInvname(invName);
                         updateDto.setUnit(invUnit);
@@ -151,7 +154,7 @@ public class UpdateInventoryController {
 
             }
 
-                isUpdate = updateInventoryModel.updateInv(updateDto);
+                isUpdate = inventoryBO.update(updateDto);
 
                 if(isUpdate){
                     infoSender("Updated" , null , "Stock Update Success");

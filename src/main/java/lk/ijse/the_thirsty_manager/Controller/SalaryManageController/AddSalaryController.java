@@ -8,6 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.SalaryBO;
 import lk.ijse.the_thirsty_manager.Dto.SalaryDto;
 import lk.ijse.the_thirsty_manager.Model.SalaryManageModel.AddSalaryModel;
 
@@ -53,9 +56,10 @@ public class AddSalaryController implements Initializable {
         txtEmployeeID.clear();
         txtAmount.clear();
     }
+    private SalaryBO salaryBO = BOFactory.getInstance().getBO(BOTypes.SALARY);
 
     private SalaryDto salaryDto = new SalaryDto();
-    private AddSalaryModel addSalaryModel = new AddSalaryModel();
+
     @FXML
     void btnSaveOnAction(ActionEvent event) {
         String empID = txtEmployeeID.getText();
@@ -88,7 +92,7 @@ public class AddSalaryController implements Initializable {
 
         try {
 
-            boolean isSaved = addSalaryModel.saveSupplier(salaryDto);
+            boolean isSaved = salaryBO.save(salaryDto);
 
             if(isSaved){
                 infoSender("Salary Paid" , null , "Salary Paid Success");
@@ -127,7 +131,7 @@ public class AddSalaryController implements Initializable {
 
     public void loadID(){
         try {
-            lblSalaryID.setText(addSalaryModel.getNextId());
+            lblSalaryID.setText(salaryBO.getNextID());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -135,9 +139,7 @@ public class AddSalaryController implements Initializable {
 
     public void salaryGetOnAction(ActionEvent event) {
         try {
-            SalaryDto salaryDto1 = new SalaryDto();
-            salaryDto1.setEmpID(txtEmployeeID.getText());
-            SalaryDto empDtl = addSalaryModel.empDetail(salaryDto1);
+            SalaryDto empDtl = salaryBO.findEmp(txtEmployeeID.getText());
             if (empDtl == null) {
                 errorSender("ID Not Found" , null , "Employee ID Not Found");
                 btnResetOnAction(null);

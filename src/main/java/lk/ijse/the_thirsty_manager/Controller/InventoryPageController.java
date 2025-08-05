@@ -10,6 +10,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.InventoryBO;
 import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Dto.InventoryDto;
 import lk.ijse.the_thirsty_manager.Dto.TM.CustomerTM;
@@ -19,6 +22,7 @@ import lk.ijse.the_thirsty_manager.Model.InventoryPageModel;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class InventoryPageController implements Initializable {
@@ -126,11 +130,11 @@ public class InventoryPageController implements Initializable {
         }
     }
 
-    private final InventoryPageModel inventoryPageModel = new InventoryPageModel();
+    private final InventoryBO inventoryBO = BOFactory.getInstance().getBO(BOTypes.INVENTORY);
 
     public void loadTable() {
         try {
-            ArrayList<InventoryDto> inventoryDtoList = inventoryPageModel.getAllStock();
+            List<InventoryDto> inventoryDtoList = inventoryBO.getAll();
             ObservableList<InventoryTM> observableList = FXCollections.observableArrayList();
 
             for (InventoryDto dto : inventoryDtoList) {

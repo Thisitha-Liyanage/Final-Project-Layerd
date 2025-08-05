@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.InventoryBO;
 import lk.ijse.the_thirsty_manager.Dto.InventoryDto;
 import lk.ijse.the_thirsty_manager.Model.InventoryManageModel.DeleteInventoryModel;
 
@@ -56,7 +59,7 @@ public class DeleteInventoryController {
         ancDeleteStock.getChildren().clear();
         ancDeleteStock.setVisible(false);
     }
-
+    private final InventoryBO inventoryBO = BOFactory.getInstance().getBO(BOTypes.INVENTORY);
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
         String invID = txtInventoryID.getText();
@@ -66,7 +69,7 @@ public class DeleteInventoryController {
             if(invID.isEmpty()){
                 errorSender("Missing Field " , null , "Enter Stock ID");
             }else{
-                isDeleted = deleteInventoryModel.deleteInv(invID);
+                isDeleted = inventoryBO.delete(invID);
 
                 if(isDeleted){
                     infoSender("Deleted" , null , "Stock Delete Success");
@@ -83,7 +86,7 @@ public class DeleteInventoryController {
         }
     }
 
-    private DeleteInventoryModel deleteInventoryModel = new DeleteInventoryModel();
+
     @FXML
     void btnFindOnAction(ActionEvent event) {
         String invID = txtInventoryID.getText();
@@ -91,7 +94,7 @@ public class DeleteInventoryController {
             if(invID.isEmpty()){
                 errorSender("Missing Field " , null , "Enter Stock ID");
             }else{
-                InventoryDto deleteDto = deleteInventoryModel.findInv(invID);
+                InventoryDto deleteDto = inventoryBO.searchById(invID);
 
                 if(deleteDto == null){
                     errorSender("ID not Found" , null , "Stock ID not Found");

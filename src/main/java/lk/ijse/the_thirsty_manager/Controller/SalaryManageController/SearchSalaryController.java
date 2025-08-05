@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.SalaryBO;
 import lk.ijse.the_thirsty_manager.Dto.SalaryDto;
 import lk.ijse.the_thirsty_manager.Model.SalaryManageModel.SearchSalaryModel;
 
@@ -37,6 +40,7 @@ public class SearchSalaryController {
         ancSearchSalary.getChildren().clear();
         ancSearchSalary.setVisible(false);
     }
+    private final SalaryBO salaryBO = BOFactory.getInstance().getBO(BOTypes.SALARY);
     public void findSalary(String salaryID){
         if(salaryID.isEmpty()){
            errorSender("ID Not Found" , null , "Salary ID Not Found");
@@ -47,11 +51,9 @@ public class SearchSalaryController {
 
         SalaryDto salaryDto = new SalaryDto();
 
-        salaryDto.setSalaryID(salaryID);
 
-        SearchSalaryModel searchSalaryModel = new SearchSalaryModel();
         try {
-            SalaryDto findSal = searchSalaryModel.findSalary(salaryDto);
+            SalaryDto findSal = salaryBO.searchByID(salaryID);
 
             if(findSal == null){
                 errorSender("ID Not Found" , null , "Salary ID Not Found");
