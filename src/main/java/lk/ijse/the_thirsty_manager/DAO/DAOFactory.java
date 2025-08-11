@@ -28,6 +28,7 @@ public class DAOFactory {
             case SALARY -> (T) new SalaryDAOIMPL();
             case ATTENDANCE -> (T) new AttendanceDAOIMPL();
             case ORDER_DETAILS -> (T) new OrderDetailsDAOIMPL();
+            case QUERY -> (T) new QueryDAOIMPL();
         };
 
     }

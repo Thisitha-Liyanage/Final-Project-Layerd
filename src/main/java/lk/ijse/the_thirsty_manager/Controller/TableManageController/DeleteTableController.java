@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.TableBO;
 import lk.ijse.the_thirsty_manager.Dto.TableDto;
 import lk.ijse.the_thirsty_manager.Model.TableManageMoled.DeleteTableModel;
 
@@ -37,14 +40,12 @@ public class DeleteTableController {
         ancDeletePage.getChildren().clear();
         ancDeletePage.setVisible(false);
     }
-
-    private DeleteTableModel deleteTableModel = new DeleteTableModel();
-
-    @FXML
+    private final TableBO tableBO = BOFactory.getInstance().getBO(BOTypes.TABLE);
+        @FXML
     void btnDeleteOnAction(ActionEvent event) {
         String tID = txtTableID.getText();
         try {
-            boolean isDeleted = deleteTableModel.DeleteTable(tID);
+            boolean isDeleted = tableBO.delete(tID);
 
             if(isDeleted){
                 infoSender("Table Deleted" , null , "Table Delete Success");
@@ -68,7 +69,7 @@ public class DeleteTableController {
             return;
         }
         try {
-            TableDto tableDto = deleteTableModel.findTable(tID);
+            TableDto tableDto = tableBO.searchByID(tID);
 
             if(tableDto == null){
                 errorSender("ERROR", null, "Table ID Not Found");

@@ -17,7 +17,7 @@ public class CustomerDAOIMPL implements CustomerDAO{
     @Override
     public boolean save(CustomerEntity customerEntity) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql = "INSERT INTO customer(customer_id, customer_name, customer_address, customer_contact, customer_age) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO customer VALUES (?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, customerEntity.getCustomerID());
         statement.setString(2, customerEntity.getCustomerName());

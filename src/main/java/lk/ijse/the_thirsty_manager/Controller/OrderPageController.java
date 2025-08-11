@@ -16,9 +16,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
-import lk.ijse.the_thirsty_manager.Dto.ItemDto;
-import lk.ijse.the_thirsty_manager.Dto.OrderDto;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.OrderBO;
+import lk.ijse.the_thirsty_manager.Dto.*;
 import lk.ijse.the_thirsty_manager.Dto.TM.CustomerTM;
 import lk.ijse.the_thirsty_manager.Dto.TM.OrderTM;
 import lk.ijse.the_thirsty_manager.Model.OrderPageModel;
@@ -41,20 +42,20 @@ public class OrderPageController implements Initializable {
 
 
     @FXML
-    private TableColumn<?, ?> clnTotalPricePlace;
+    private TableColumn<OrderTM, Double> clnTotalPricePlace;
 
     @FXML
-    private TableColumn<?, ?> clnOrderIDPlace;
+    private TableColumn<OrderTM, String> clnOrderIDPlace;
 
 
     @FXML
-    private TableColumn<?, ?> clnCustomerIDPlace;
+    private TableColumn<OrderTM, String> clnCustomerIDPlace;
 
     @FXML
-    private TableColumn<?, ?> clnDatePlace;
+    private TableColumn<OrderTM , String> clnDatePlace;
 
     @FXML
-    private TableView<?> tblPlaceOrder;
+    private TableView<OrderTM> tblPlaceOrder;
 
     @FXML
     private AnchorPane ancOrder;
@@ -99,11 +100,12 @@ public class OrderPageController implements Initializable {
     private TextField txtQuantity;
 
     private OrderPageModel orderPageModel = new OrderPageModel();
-
+    private List<CustomOrderDTO> cart = new ArrayList<>();
     @FXML
     void AddToCartOnAction(ActionEvent event) {
         String quantityS = txtQuantity.getText();
-
+        tblPlaceOrder.setVisible(false);
+        tableOrder.setVisible(true);
         int qty = 0;
         try{
             qty = Integer.parseInt(quantityS);
@@ -112,38 +114,36 @@ public class OrderPageController implements Initializable {
             btnResetOnAction(null);
         }
 
-        OrderDto OrderDTO = new OrderDto();
-
-        orderDto.setCustomerID(txtCustomerID.getText());
-        orderDto.setUnitPrice(Double.parseDouble(lblUnitPrice.getText()));
-        orderDto.setQuantity(qty);
-        orderDto.setItemName(txtItemName.getText());
-        orderDto.setItemID(txtItemID.getText());
-
-
-        try{
-            ArrayList<OrderDto> placeOrderLIst = orderPageModel.addToCart(orderDto);
-
-            if(placeOrderLIst != null){
-                ObservableList<OrderTM> list = FXCollections.observableArrayList();
-                for (OrderDto orderDto1 : placeOrderLIst) {
-                    OrderTM OrderTM = new OrderTM(
-                            orderDto1.getCustomerID(),
-                            orderDto1.getUnitPrice(),
-                            orderDto1.getItemName(),
-                            orderDto1.getQuantity(),
-                            orderDto1.getItemID()
-                    );
-                    list.add(OrderTM);
-                }
-                tableOrder.setItems(list);
-            }else{
-                errorSender("ERROR" , null , "Add To Cart Not Success");
-            }
-
-        }catch (SQLException e){
-            e.printStackTrace();
+        CustomOrderDTO customOrderDTO = new CustomOrderDTO();
+        customOrderDTO.setCustomerID(txtCustomerID.getText());
+        if(txtQuantity.getText() != null) {
+            customOrderDTO.setUnitPrice(Double.parseDouble(lblUnitPrice.getText()));
+        }else{
+            new Alert(Alert.AlertType.ERROR , "Quantity is Empty").show();
         }
+        customOrderDTO.setQty(qty);
+        customOrderDTO.setItemName(txtItemName.getText());
+        customOrderDTO.setItemID(txtItemID.getText());
+        customOrderDTO.setOrderID(lblOrderID.getText());
+        customOrderDTO.setDate(lblDate.getText());
+        double totalam = customOrderDTO.getUnitPrice()* customOrderDTO.getQty();
+        customOrderDTO.setTotalAmount(totalam);
+        System.out.println(totalam);
+        cart.add(customOrderDTO);
+
+            ObservableList<OrderTM> list = FXCollections.observableArrayList();
+            for (CustomOrderDTO customOrderDTO1 : cart) {
+                OrderTM OrderTM = new OrderTM(
+                        customOrderDTO1.getCustomerID(),
+                        customOrderDTO1.getUnitPrice(),
+                        customOrderDTO1.getItemName(),
+                        customOrderDTO.getQty(),
+                        customOrderDTO1.getItemID()
+                );
+                list.add(OrderTM);
+            }
+            tableOrder.setItems(list);
+
 
         clnCustomerID     .setCellValueFactory(new PropertyValueFactory<>("customerID"));
         clnItemName   .setCellValueFactory(new PropertyValueFactory<>("itemName"));
@@ -157,7 +157,7 @@ public class OrderPageController implements Initializable {
 
     @FXML
     void btnRefreshOnAction(ActionEvent event) {
-        tableOrder.refresh();
+        tblPlaceOrder.refresh();
     }
 
     @FXML
@@ -173,8 +173,26 @@ public class OrderPageController implements Initializable {
 
     @FXML
     void placeOrderOnAction(ActionEvent event) {
+
+        tblPlaceOrder.setVisible(true);
+        tableOrder.setVisible(false);
+        try {
+            if(orderBO.placeOrder(cart) && orderBO.saveOrderDetails(cart)){
+                new Alert(Alert.AlertType.INFORMATION , "Order Placed").show();
+                nextID();
+                cart.clear();
+            }else{
+                new Alert(Alert.AlertType.ERROR , "Order Not Saved").show();
+                btnResetOnAction(null);
+                cart.clear();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-    private OrderDto orderDto = new OrderDto();
+
+    private final OrderBO orderBO = BOFactory.getInstance().getBO(BOTypes.ORDER);
+
     @FXML
     void txtItemIDOnAction(ActionEvent event) {
         String customerID = txtCustomerID.getText();
@@ -195,7 +213,7 @@ public class OrderPageController implements Initializable {
 
         //find Item Details
         try {
-            ItemDto findItemDto = orderPageModel.findItem(itemID);
+            ItemDto findItemDto = orderBO.findItem(itemID);
 
             if(findItemDto == null){
                 errorSender("ID Not Found" , null , "Item ID Not Found");
@@ -218,7 +236,7 @@ public class OrderPageController implements Initializable {
         //Find Customer ID
 
         try {
-            boolean isFound = orderPageModel.findCustomer(customerID);
+            boolean isFound = orderBO.findCustomer(customerID);
 
             if(!isFound){
                 errorSender("ID Not Found" , null , "Customer ID Not Found");
@@ -229,6 +247,22 @@ public class OrderPageController implements Initializable {
             e.printStackTrace();
         }
 
+    }
+
+    public void loadTable() throws SQLException{
+        List<OrderDto> orderDtoList = orderBO.getAll();
+
+        ObservableList<OrderTM> list = FXCollections.observableArrayList();
+        for (OrderDto orderDto : orderDtoList){
+            OrderTM orderTM = new OrderTM(
+                    orderDto.getOrderID(),
+                    orderDto.getCustomerID(),
+                    orderDto.getTotalAmount(),
+                    orderDto.getDate()
+            );
+            list.add(orderTM);
+        }
+        tblPlaceOrder.setItems(list);
     }
 
     public void btnPlaceOrderOnAction(ActionEvent event) {
@@ -266,12 +300,24 @@ public class OrderPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblDate.setText(String.valueOf(LocalDate.now()));
         nextID();
-        tblPlaceOrder.setVisible(false);
+        tableOrder.setVisible(false);
+        tblPlaceOrder.setVisible(true);
+
+        clnCustomerIDPlace     .setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        clnOrderIDPlace   .setCellValueFactory(new PropertyValueFactory<>("orderID"));
+        clnTotalPricePlace.setCellValueFactory(new PropertyValueFactory<>("totalAmount"));
+        clnDatePlace.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        try{
+            loadTable();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public void nextID(){
         try{
-            lblOrderID.setText(orderPageModel.getNextId());
+            lblOrderID.setText(orderBO.nextID());
         }catch (SQLException e){
             e.printStackTrace();
         }

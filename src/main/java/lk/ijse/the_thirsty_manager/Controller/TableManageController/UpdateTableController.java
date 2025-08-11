@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.TableBO;
 import lk.ijse.the_thirsty_manager.Dto.TableDto;
 import lk.ijse.the_thirsty_manager.Model.TableManageMoled.UpdateTableModel;
 
@@ -39,7 +42,7 @@ public class UpdateTableController {
         ancUpdateTable.setVisible(false);
     }
 
-    private UpdateTableModel updateTableModel = new UpdateTableModel();
+    private final TableBO tableBO = BOFactory.getInstance().getBO(BOTypes.TABLE);
     @FXML
     void btnFindOnAction(ActionEvent event) {
         String tID = txtTableID.getText();
@@ -50,7 +53,7 @@ public class UpdateTableController {
             return;
         }
         try {
-            TableDto findDto = updateTableModel.findTable(tID);
+            TableDto findDto = tableBO.searchByID(tID);
 
             if (findDto == null) {
                 errorSender("ID Not Found" , null , "Table ID Not Found");
@@ -87,7 +90,7 @@ public class UpdateTableController {
                 return;
             }
             tableDto.setNoOfSeat(noOfSeatInt);
-            boolean isUpdated = updateTableModel.updateTable(tableDto);
+            boolean isUpdated = tableBO.update(tableDto);
 
             if(isUpdated){
                 infoSender("Updated" , null , "Table Update Success");

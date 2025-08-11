@@ -27,4 +27,11 @@ public class OrderTM{
         this.unitPrice = unitPrice;
         this.Qty = qty;
     }
+
+    public OrderTM(String orderID , String customerID , double totalAmount , String date){
+        this.customerID = customerID;
+        this.orderID = orderID;
+        this.totalAmount = totalAmount;
+        this.date = date;
+    }
 }

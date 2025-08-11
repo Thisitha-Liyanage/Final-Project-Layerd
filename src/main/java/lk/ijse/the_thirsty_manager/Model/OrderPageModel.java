@@ -15,80 +15,82 @@ import java.util.List;
 public class OrderPageModel {
 
     public boolean placeOrder(OrderDto orderDto) throws SQLException {
-        Connection connection = null;
-
-        //save order
-        try {
-            connection = DBConnection.getInstance().getConnection();
-            connection.setAutoCommit(false);
-
-            String saveOrderSql = "insert into orders (order_id, customer_id, total_amount, table_id, date) values (?, ?, ?, ?, ?)";
-            PreparedStatement saveOrderPstm = connection.prepareStatement(saveOrderSql);
-            saveOrderPstm.setString(1, orderDto.getOrderID());
-            saveOrderPstm.setString(2, orderDto.getCustomerID());
-            saveOrderPstm.setDouble(3, orderDto.getTotalAmount());
-            saveOrderPstm.setString(4, orderDto.getTableID());
-            saveOrderPstm.setDate(5, Date.valueOf(LocalDate.now()));
-            int affectedRows = saveOrderPstm.executeUpdate();
-
-            if (affectedRows == 0) {
-                connection.rollback();
-                return false;
-            }
-
-            //save order details
-            String saveOrderDetailSql = "insert into oder_details ( order_id, item_id, quantity) values (  ? , ? , ?))";
-            PreparedStatement saveOrderDetailPstm = connection.prepareStatement(saveOrderDetailSql);
-            
-            saveOrderDetailPstm.setString(1 , orderDto.getOrderID());
-            saveOrderDetailPstm.setString(2 , orderDto.getItemID());
-            saveOrderDetailPstm.setDouble(3 , orderDto.getQuantity());
-
-            int detailAffectedRows = saveOrderDetailPstm.executeUpdate();
-            if (detailAffectedRows == 0) {
-                connection.rollback();
-                return false;
-            }
-
-            //change quantity
-            String updateStockSql = "UPDATE inventory i\n" +
-                    "JOIN ingredients ing ON i.inventory_id = ing.inventory_id\n" +
-                    "SET i.current_stock = i.current_stock - (ing.quantity_used * ?)\n" +
-                    "WHERE ing.menu_item_id = ? ";
-            PreparedStatement updateStockPstm = connection.prepareStatement(updateStockSql);
-
-                saveOrderDetailPstm.setDouble(1, orderDto.getQuantity());
-                saveOrderDetailPstm.setString(2, orderDto.getItemID());
-
-                int updatequnatityDetail = saveOrderDetailPstm.executeUpdate();
-                if (updatequnatityDetail == 0) {
-                    connection.rollback();
-                    return false;
-                }
-
-                updateStockPstm.setDouble(1, orderDto.getQuantity());
-                updateStockPstm.setString(2, orderDto.getItemID());
-
-                int stockAffectedRows = updateStockPstm.executeUpdate();
-                if (stockAffectedRows == 0) {
-                    connection.rollback();
-                    return false;
-                }
-
-            connection.commit();
-            return true;
-
-        } catch (SQLException e) {
-            if (connection != null) {
-                connection.rollback();
-            }
-            throw e;
-        } finally {
-            if (connection != null) {
-                connection.setAutoCommit(true);
-                connection.close();
-            }
-        }
+//        Connection connection = null;
+//
+//        //save order
+//        try {
+//            connection = DBConnection.getInstance().getConnection();
+//            connection.setAutoCommit(false);
+//
+//            String saveOrderSql = "insert into orders (order_id, customer_id, total_amount, table_id, date) values (?, ?, ?, ?, ?)";
+//            PreparedStatement saveOrderPstm = connection.prepareStatement(saveOrderSql);
+//            saveOrderPstm.setString(1, orderDto.getOrderID());
+//            saveOrderPstm.setString(2, orderDto.getCustomerID());
+//            saveOrderPstm.setDouble(3, orderDto.getTotalAmount());
+//            saveOrderPstm.setString(4, orderDto.getTableID());
+//            saveOrderPstm.setDate(5, Date.valueOf(LocalDate.now()));
+//            int affectedRows = saveOrderPstm.executeUpdate();
+//
+//            if (affectedRows == 0) {
+//                connection.rollback();
+//                return false;
+//            }
+//
+//            //save order details
+//            String saveOrderDetailSql = "insert into oder_details ( order_id, item_id, quantity) values (  ? , ? , ?))";
+//            PreparedStatement saveOrderDetailPstm = connection.prepareStatement(saveOrderDetailSql);
+//
+//            saveOrderDetailPstm.setString(1 , orderDto.getOrderID());
+//            saveOrderDetailPstm.setString(2 , orderDto.getItemID());
+//            saveOrderDetailPstm.setDouble(3 , orderDto.getQuantity());
+//
+//            int detailAffectedRows = saveOrderDetailPstm.executeUpdate();
+//            if (detailAffectedRows == 0) {
+//                connection.rollback();
+//                return false;
+//            }
+//
+//            //change quantity
+//            String updateStockSql = "UPDATE inventory i\n" +
+//                    "JOIN ingredients ing ON i.inventory_id = ing.inventory_id\n" +
+//                    "SET i.current_stock = i.current_stock - (ing.quantity_used * ?)\n" +
+//                    "WHERE ing.menu_item_id = ? ";
+//            PreparedStatement updateStockPstm = connection.prepareStatement(updateStockSql);
+//
+//                saveOrderDetailPstm.setDouble(1, orderDto.getQuantity());
+//                saveOrderDetailPstm.setString(2, orderDto.getItemID());
+//
+//                int updatequnatityDetail = saveOrderDetailPstm.executeUpdate();
+//                if (updatequnatityDetail == 0) {
+//                    connection.rollback();
+//                    return false;
+//                }
+//
+//                updateStockPstm.setDouble(1, orderDto.getQuantity());
+//                updateStockPstm.setString(2, orderDto.getItemID());
+//
+//                int stockAffectedRows = updateStockPstm.executeUpdate();
+//                if (stockAffectedRows == 0) {
+//                    connection.rollback();
+//                    return false;
+//                }
+//
+//            connection.commit();
+//            return true;
+//
+//        } catch (SQLException e) {
+//            if (connection != null) {
+//                connection.rollback();
+//            }
+//            throw e;
+//        } finally {
+//            if (connection != null) {
+//                connection.setAutoCommit(true);
+//                connection.close();
+//            }
+//        }
+//
+        return false;
     }
     public String getNextId() throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
@@ -148,9 +150,6 @@ public class OrderPageModel {
 
     private ArrayList<OrderDto> cart = new ArrayList<>();
     public ArrayList<OrderDto> addToCart(OrderDto addcartOrderDto) throws SQLException {
-        if(cart != null){
-            cart.add(new OrderDto(addcartOrderDto.getCustomerID(), addcartOrderDto.getUnitPrice(), addcartOrderDto.getItemName(), (addcartOrderDto.getQuantity()), addcartOrderDto.getItemID()));
-        }
 
         return cart;
     }

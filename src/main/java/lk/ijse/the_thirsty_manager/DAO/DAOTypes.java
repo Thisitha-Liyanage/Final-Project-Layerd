@@ -12,5 +12,6 @@ public enum DAOTypes {
     TABLE,
     SALARY,
     ATTENDANCE,
-    ORDER_DETAILS
+    ORDER_DETAILS,
+    QUERY
 }

@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.TableBO;
 import lk.ijse.the_thirsty_manager.Dto.TableDto;
 import lk.ijse.the_thirsty_manager.Model.TableManageMoled.AddTableModel;
 
@@ -47,7 +50,7 @@ public class AddTableController implements Initializable {
         txtNoOfSeat.clear();
         SplitMenuStatus.setText("Select Status");
     }
-
+    private final TableBO tableBO = BOFactory.getInstance().getBO(BOTypes.TABLE);
     @FXML
     void btnSaveOnAction(ActionEvent event) {
         String tableID = lblTableID.getText();
@@ -76,7 +79,7 @@ public class AddTableController implements Initializable {
         }
 
         try{
-            boolean isSaved = addTableModel.saveTable(tableDto);
+            boolean isSaved = tableBO.save(tableDto);
 
             if(isSaved){
                 infoSender("Table Saved" , null , "Table Saved Success");
@@ -115,10 +118,10 @@ public class AddTableController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadID();
     }
-    private AddTableModel addTableModel = new AddTableModel();
+
     public void loadID(){
         try {
-            lblTableID.setText(addTableModel.getNextId());
+            lblTableID.setText(tableBO.nextID());
         } catch (SQLException e) {
             e.printStackTrace();
         }

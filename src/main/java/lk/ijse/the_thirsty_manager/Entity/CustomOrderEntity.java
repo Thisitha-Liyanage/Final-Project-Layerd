@@ -1,22 +1,20 @@
-package lk.ijse.the_thirsty_manager.Dto;
+package lk.ijse.the_thirsty_manager.Entity;
 
-import lk.ijse.the_thirsty_manager.Dto.TM.OrderTM;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.util.List;
-
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDto {
+@Data
+public class CustomOrderEntity {
     private String orderID;
     private String customerID;
     private double totalAmount;
     private String tableID;
     private String date;
-
+    private String itemID;
+    private double unitPrice;
+    private String itemName;
+    private int quantity;
 }
