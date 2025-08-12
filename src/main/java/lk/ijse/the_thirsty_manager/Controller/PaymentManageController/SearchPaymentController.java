@@ -7,11 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.PaymentBO;
-import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Dto.PaymentDto;
-import lk.ijse.the_thirsty_manager.Dto.SalaryDto;
-
-import lk.ijse.the_thirsty_manager.Model.PaymentManageModel.SearchPaymentModel;
 
 import java.sql.SQLException;
 
@@ -45,7 +41,7 @@ public class SearchPaymentController {
         ancSearchPayment.setVisible(false);
     }
     private final PaymentBO paymentBO = BOFactory.getInstance().getBO(BOTypes.PAYMENT);
-    private SearchPaymentModel searchPaymentModel = new SearchPaymentModel();
+
     public void searchPayment(String payID){
         paymentDto.setPaymentID(payID);
         try {

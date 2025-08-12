@@ -17,17 +17,12 @@ import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.EmployeeBO;
 import lk.ijse.the_thirsty_manager.Controller.EmployeeManageController.SearchEmployeeController;
-import lk.ijse.the_thirsty_manager.Controller.ItemManageController.SearchItemController;
-import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Dto.EmployeeDto;
-import lk.ijse.the_thirsty_manager.Dto.TM.CustomerTM;
 import lk.ijse.the_thirsty_manager.Dto.TM.EmployeeTM;
-import lk.ijse.the_thirsty_manager.Model.EmployeePageModel;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 

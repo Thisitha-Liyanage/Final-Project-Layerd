@@ -13,18 +13,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.the_thirsty_manager.Controller.EmployeeManageController.SearchEmployeeController;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.SupplierBO;
 import lk.ijse.the_thirsty_manager.Controller.ManageSupplierController.SearchSupplierCOntroller;
-import lk.ijse.the_thirsty_manager.Dto.EmployeeDto;
 import lk.ijse.the_thirsty_manager.Dto.SupplierDto;
-import lk.ijse.the_thirsty_manager.Dto.TM.EmployeeTM;
 import lk.ijse.the_thirsty_manager.Dto.TM.SupplierTM;
-import lk.ijse.the_thirsty_manager.Model.SUpplierPageModel;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SupplierPageController implements Initializable {
@@ -139,12 +138,12 @@ public class SupplierPageController implements Initializable {
             e.printStackTrace();
         }
     }
-    private SUpplierPageModel sUpplierPageModel = new SUpplierPageModel();
-    private SupplierTM supplierTM = new SupplierTM();
+
+    private final SupplierBO supplierBO = BOFactory.getInstance().getBO(BOTypes.SUPPLIER);
 
     public void loadTable() throws SQLException {
 
-        ArrayList<SupplierDto> supplierDTOArrayList = sUpplierPageModel.getAllSuppliers();
+        List<SupplierDto> supplierDTOArrayList =  supplierBO.getAll();
 
         ObservableList<SupplierTM> list = FXCollections.observableArrayList();
         for (SupplierDto supplierDto : supplierDTOArrayList) {

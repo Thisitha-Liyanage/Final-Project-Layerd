@@ -11,7 +11,6 @@ import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.TableBO;
 import lk.ijse.the_thirsty_manager.Dto.TableDto;
-import lk.ijse.the_thirsty_manager.Model.TableManageMoled.DeleteTableModel;
 
 import java.sql.SQLException;
 

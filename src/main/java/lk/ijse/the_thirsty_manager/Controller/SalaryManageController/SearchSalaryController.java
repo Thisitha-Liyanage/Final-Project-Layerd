@@ -11,7 +11,6 @@ import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.SalaryBO;
 import lk.ijse.the_thirsty_manager.Dto.SalaryDto;
-import lk.ijse.the_thirsty_manager.Model.SalaryManageModel.SearchSalaryModel;
 
 import java.sql.SQLException;
 

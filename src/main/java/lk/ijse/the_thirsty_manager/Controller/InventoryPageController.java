@@ -13,15 +13,11 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.InventoryBO;
-import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Dto.InventoryDto;
-import lk.ijse.the_thirsty_manager.Dto.TM.CustomerTM;
 import lk.ijse.the_thirsty_manager.Dto.TM.InventoryTM;
-import lk.ijse.the_thirsty_manager.Model.InventoryPageModel;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 

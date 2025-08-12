@@ -17,17 +17,12 @@ import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.AttendanceBO;
 import lk.ijse.the_thirsty_manager.Controller.AttendanceManage.SearchAttendanceController;
-import lk.ijse.the_thirsty_manager.Controller.CustomerManageController.SearchCustomerController;
 import lk.ijse.the_thirsty_manager.Dto.AttendanceDto;
-import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Dto.TM.AttendanceTM;
-import lk.ijse.the_thirsty_manager.Dto.TM.CustomerTM;
-import lk.ijse.the_thirsty_manager.Model.AttendancePageModel;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 

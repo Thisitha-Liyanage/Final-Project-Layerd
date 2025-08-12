@@ -8,9 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.AttendanceBO;
-import lk.ijse.the_thirsty_manager.BO.Custom.CustomerBO;
 import lk.ijse.the_thirsty_manager.Dto.AttendanceDto;
-import lk.ijse.the_thirsty_manager.Model.AttendanceManage.AddAttendanceModel;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -55,7 +53,7 @@ public class AddAttendanceController implements Initializable {
     }
 
     private AttendanceDto attendanceDto  = new AttendanceDto();
-    private AddAttendanceModel addAttendanceModel = new AddAttendanceModel();
+
     @FXML
     void btnSaveOnAction(ActionEvent event)  {
         txtDate.setText(String.valueOf(LocalDate.now()));

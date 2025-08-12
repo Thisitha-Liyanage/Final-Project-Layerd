@@ -16,18 +16,13 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.PaymentBO;
-import lk.ijse.the_thirsty_manager.Controller.CustomerManageController.SearchCustomerController;
 import lk.ijse.the_thirsty_manager.Controller.PaymentManageController.SearchPaymentController;
-import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Dto.PaymentDto;
-import lk.ijse.the_thirsty_manager.Dto.TM.CustomerTM;
 import lk.ijse.the_thirsty_manager.Dto.TM.PaymentTM;
-import lk.ijse.the_thirsty_manager.Model.PaymentModel;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -156,7 +151,6 @@ public class PaymentPageController implements Initializable {
         }
     }
     private final PaymentBO paymentBO = BOFactory.getInstance().getBO(BOTypes.PAYMENT);
-    private PaymentModel paymentModel = new PaymentModel();
     public void loadTable() throws SQLException {
 
         List<PaymentDto> paymentDTOArrayList = paymentBO.getAll();

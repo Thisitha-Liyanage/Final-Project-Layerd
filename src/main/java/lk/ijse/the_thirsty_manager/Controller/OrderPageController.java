@@ -1,13 +1,7 @@
 package lk.ijse.the_thirsty_manager.Controller;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,9 +14,7 @@ import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.OrderBO;
 import lk.ijse.the_thirsty_manager.Dto.*;
-import lk.ijse.the_thirsty_manager.Dto.TM.CustomerTM;
 import lk.ijse.the_thirsty_manager.Dto.TM.OrderTM;
-import lk.ijse.the_thirsty_manager.Model.OrderPageModel;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -99,7 +91,6 @@ public class OrderPageController implements Initializable {
     @FXML
     private TextField txtQuantity;
 
-    private OrderPageModel orderPageModel = new OrderPageModel();
     private List<CustomOrderDTO> cart = new ArrayList<>();
     @FXML
     void AddToCartOnAction(ActionEvent event) {

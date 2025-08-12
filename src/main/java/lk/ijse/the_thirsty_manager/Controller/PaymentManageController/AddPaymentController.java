@@ -8,13 +8,9 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.PaymentBO;
-import lk.ijse.the_thirsty_manager.DB.DBConnection;
 import lk.ijse.the_thirsty_manager.Dto.PaymentDto;
-import lk.ijse.the_thirsty_manager.Model.PaymentManageModel.AddPaymentModel;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -69,7 +65,7 @@ public class AddPaymentController implements Initializable {
         paymentDto.setPaymentMethod("Cash");
     }
     private final PaymentBO paymentBO = BOFactory.getInstance().getBO(BOTypes.PAYMENT);
-    private AddPaymentModel addPaymentModel = new AddPaymentModel();
+
     @FXML
     void btnSaveOnAction(ActionEvent event) {
         txtDate.setText(String.valueOf(LocalDate.now()));

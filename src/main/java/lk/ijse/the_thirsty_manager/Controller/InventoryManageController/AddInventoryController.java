@@ -8,11 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.InventoryBO;
-import lk.ijse.the_thirsty_manager.DAO.Custom.InventoryDAO;
-import lk.ijse.the_thirsty_manager.DAO.DAOFactory;
-import lk.ijse.the_thirsty_manager.DAO.DAOTypes;
 import lk.ijse.the_thirsty_manager.Dto.InventoryDto;
-import lk.ijse.the_thirsty_manager.Model.InventoryManageModel.AddInventoryModel;
 
 import java.net.URL;
 import java.sql.SQLException;

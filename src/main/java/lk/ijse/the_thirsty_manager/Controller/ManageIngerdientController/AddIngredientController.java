@@ -13,8 +13,6 @@ import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.IngredientBO;
 import lk.ijse.the_thirsty_manager.BO.Exceptions.IDNotFoundException;
 import lk.ijse.the_thirsty_manager.Dto.IngredientDto;
-import lk.ijse.the_thirsty_manager.Model.IngerdientModel;
-import lk.ijse.the_thirsty_manager.Model.IngredientManageModel.AddIngredient;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -58,7 +56,7 @@ public class AddIngredientController implements Initializable {
         txtStockUse.clear();
     }
 
-    private final AddIngredient addIngredientModel = new AddIngredient();
+
     private final IngredientBO ingredientBO = BOFactory.getInstance().getBO(BOTypes.INGREDIENTS);
     @FXML
     void btnSaveOnAction(ActionEvent event) {
@@ -152,7 +150,7 @@ public class AddIngredientController implements Initializable {
 
     public void nextID(){
         try {
-            lblIngredientID.setText(addIngredientModel.getNextId());
+            lblIngredientID.setText(ingredientBO.nextID());
         } catch (SQLException e) {
             e.printStackTrace();
         }

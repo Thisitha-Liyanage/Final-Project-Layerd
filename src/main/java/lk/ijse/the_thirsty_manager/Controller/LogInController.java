@@ -1,6 +1,5 @@
 package lk.ijse.the_thirsty_manager.Controller;
 
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,12 +9,9 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
-import lk.ijse.the_thirsty_manager.AppInitializer;
 import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.LoginBO;
-import lk.ijse.the_thirsty_manager.Model.LogInModel;
 
 import java.net.URL;
 import java.sql.SQLException;

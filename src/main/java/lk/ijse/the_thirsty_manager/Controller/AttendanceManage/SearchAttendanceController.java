@@ -8,7 +8,6 @@ import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.AttendanceBO;
 import lk.ijse.the_thirsty_manager.Dto.AttendanceDto;
-import lk.ijse.the_thirsty_manager.Model.AttendanceManage.SearchAttendanceModel;
 
 import java.sql.SQLException;
 

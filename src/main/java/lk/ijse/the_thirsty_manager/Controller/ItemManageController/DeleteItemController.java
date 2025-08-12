@@ -11,7 +11,7 @@ import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.ItemBO;
 import lk.ijse.the_thirsty_manager.Dto.ItemDto;
-import lk.ijse.the_thirsty_manager.Model.ItemManageModel.DeleteItemModel;
+
 
 import java.sql.SQLException;
 
@@ -53,7 +53,7 @@ public class DeleteItemController {
         ancItemDelete.getChildren().clear();
     }
     private final ItemBO itemBO = BOFactory.getInstance().getBO(BOTypes.ITEM);
-    private DeleteItemModel deleteItemModel = new DeleteItemModel();
+
     @FXML
     void btnFind(ActionEvent event) {
         try {

@@ -16,21 +16,13 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.SalaryBO;
-import lk.ijse.the_thirsty_manager.Controller.CustomerManageController.SearchCustomerController;
-import lk.ijse.the_thirsty_manager.Controller.SalaryManageController.AddSalaryController;
 import lk.ijse.the_thirsty_manager.Controller.SalaryManageController.SearchSalaryController;
-import lk.ijse.the_thirsty_manager.Dto.CustomerDto;
 import lk.ijse.the_thirsty_manager.Dto.SalaryDto;
-import lk.ijse.the_thirsty_manager.Dto.TM.CustomerTM;
 import lk.ijse.the_thirsty_manager.Dto.TM.SalaryTM;
-import lk.ijse.the_thirsty_manager.Model.SalaryManageModel.AddSalaryModel;
-import lk.ijse.the_thirsty_manager.Model.SalaryManageModel.SearchSalaryModel;
-import lk.ijse.the_thirsty_manager.Model.SalaryPageModel;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 

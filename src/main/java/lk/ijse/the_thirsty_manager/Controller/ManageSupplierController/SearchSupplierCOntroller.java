@@ -9,10 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.SupplierBO;
-import lk.ijse.the_thirsty_manager.BO.SuperBO;
 import lk.ijse.the_thirsty_manager.Dto.SupplierDto;
-import lk.ijse.the_thirsty_manager.Dto.TM.SupplierTM;
-import lk.ijse.the_thirsty_manager.Model.SupplierManageModel.SearchSupplierModel;
 
 import java.sql.SQLException;
 

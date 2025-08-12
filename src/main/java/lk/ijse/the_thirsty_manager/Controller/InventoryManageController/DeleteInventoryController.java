@@ -11,7 +11,6 @@ import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.InventoryBO;
 import lk.ijse.the_thirsty_manager.Dto.InventoryDto;
-import lk.ijse.the_thirsty_manager.Model.InventoryManageModel.DeleteInventoryModel;
 
 import java.sql.SQLException;
 

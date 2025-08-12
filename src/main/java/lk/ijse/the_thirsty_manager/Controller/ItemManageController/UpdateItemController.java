@@ -11,7 +11,6 @@ import lk.ijse.the_thirsty_manager.BO.BOFactory;
 import lk.ijse.the_thirsty_manager.BO.BOTypes;
 import lk.ijse.the_thirsty_manager.BO.Custom.ItemBO;
 import lk.ijse.the_thirsty_manager.Dto.ItemDto;
-import lk.ijse.the_thirsty_manager.Model.ItemManageModel.UpdateItemModel;
 
 import java.sql.SQLException;
 
