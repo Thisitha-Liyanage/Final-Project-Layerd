@@ -11,5 +11,6 @@ public enum BOTypes {
     PAYMENT,
     TABLE,
     SALARY,
-    ATTENDANCE
+    ATTENDANCE,
+    LOGIN
 }

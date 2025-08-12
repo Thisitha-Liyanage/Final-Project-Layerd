@@ -14,7 +14,7 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/AdminDashBoard.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("/View/LogInPage.fxml"));
         stage.setResizable(false);
         Scene scene = new Scene(parent);
         stage.setScene(scene);

@@ -29,6 +29,7 @@ public class DAOFactory {
             case ATTENDANCE -> (T) new AttendanceDAOIMPL();
             case ORDER_DETAILS -> (T) new OrderDetailsDAOIMPL();
             case QUERY -> (T) new QueryDAOIMPL();
+            case LOGIN -> (T) new LoginDAOIMPL();
         };
 
     }

@@ -12,6 +12,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import lk.ijse.the_thirsty_manager.AppInitializer;
+import lk.ijse.the_thirsty_manager.BO.BOFactory;
+import lk.ijse.the_thirsty_manager.BO.BOTypes;
+import lk.ijse.the_thirsty_manager.BO.Custom.LoginBO;
 import lk.ijse.the_thirsty_manager.Model.LogInModel;
 
 import java.net.URL;
@@ -34,15 +37,15 @@ public class LogInController implements Initializable {
 
     @FXML
     private TextField txtUserID;
-    LogInModel logInModel = new LogInModel();
     private final ProgressIndicator progressIndicator = new ProgressIndicator();
 
+    private LoginBO loginBO = BOFactory.getInstance().getBO(BOTypes.LOGIN);
     @FXML
     void btnLogInOnAction(ActionEvent event) {
         try{
             String inpUserId = txtUserID.getText();
             String inpPass = pwfUserPassword.getText();
-            String role = logInModel.logIn(inpUserId , inpPass);
+            String role = loginBO.login(inpUserId , inpPass);
 
             if(role == null){
 
@@ -87,7 +90,7 @@ public class LogInController implements Initializable {
         try{
             String inpUserId = txtUserID.getText();
             String inpPass = pwfUserPassword.getText();
-            String role = logInModel.logIn(inpUserId , inpPass);
+            String role = loginBO.login(inpUserId , inpPass);
 
             if(role == null){
 

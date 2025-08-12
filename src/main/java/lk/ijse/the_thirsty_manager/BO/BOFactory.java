@@ -24,6 +24,7 @@ public class BOFactory {
             case TABLE -> (T) new TableBOIMPL();
             case SALARY -> (T) new SalaryBOIMPL();
             case ATTENDANCE -> (T) new AttendanceBOIMPL();
+            case LOGIN -> (T) new LoginBOIMPL();
         };
 
     }
